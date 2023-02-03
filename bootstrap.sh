@@ -9,20 +9,20 @@ set -e
 
 echo "This script will configure a linux machine"
 
-echo "Checking if secrets.yml and options.yml files exist"
-# Check if secrets.yml file exists
-if [ ! -f "secrets.yml" ]; then
-    echo "secrets.yml file not found"
+echo "Checking if secret.yml and options.yml files exist"
+# Check if secret.yml file exists
+if [ ! -f "secret.yml" ]; then
+    echo "secret.yml file not found"
     exit 1
 fi
 
-# Check if secrets.yml file is encrypted if not encrypt it
-if grep -q "$ANSIBLE_VAULT;1.1;AES256" secrets.yml; then
-    echo "secrets.yml file is encrypted"
+# Check if secret.yml file is encrypted if not encrypt it
+if grep -q "$ANSIBLE_VAULT;1.1;AES256" secret.yml; then
+    echo "secret.yml file is encrypted"
 else
-    echo "secrets.yml file is not encrypted"
-    echo "Encrypting secrets.yml file"
-    ansible-vault encrypt secrets.yml
+    echo "secret.yml file is not encrypted"
+    echo "Encrypting secret.yml file"
+    ansible-vault encrypt secret.yml
 fi
 
 # Check if options.yml file exists
@@ -52,7 +52,7 @@ git clone https://github.com/elotojaa/ansible
 
 # run ansible playbook
 cd ansible
-mv ../secrets.yml .
+mv ../secret.yml .
 ansible-galaxy install -r requirements.yml
 
 # ask for version to install
