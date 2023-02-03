@@ -17,7 +17,7 @@ if [ ! -f "secret.yml" ]; then
 fi
 
 # Check if secret.yml file is encrypted if not encrypt it
-if grep -q "$ANSIBLE_VAULT;1.1;AES256" secret.yml; then
+if grep -q "$ANSIBLE_VAULT" secret.yml; then
     echo "secret.yml file is encrypted"
 else
     echo "secret.yml file is not encrypted"
