@@ -10,3 +10,6 @@
       
       - role: docker
         when: software|select("equalto", "docker")
+      
+      - role: samba
+        when: software|select("equalto", "samba")

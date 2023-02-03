@@ -19,6 +19,3 @@
       - role: gdb
         when: software|select("equalto", "gdb")
 
-      - role: samba
-        when: software|select("equalto", "samba")
-
