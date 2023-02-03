@@ -12,8 +12,6 @@ software:
   - ruby
   - ghidra
   - gdb
-  - pyenv
-  - nvm
   - qemu
 
 apt_software:
@@ -23,6 +21,8 @@ apt_software:
   - gcc
   - g++
   - make
+  - node
+  - npm
     
 pip_software:
   - black
