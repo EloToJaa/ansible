@@ -1,0 +1,37 @@
+version: '3'
+services:
+  grafana:
+    image: grafana/grafana-oss:latest
+    container_name: grafana
+    ports:
+      - 3000:3000
+    volumes:
+      - grafana-data:/var/lib/grafana
+    restart: unless-stopped
+    networks:
+      - proxy
+    labels:
+      traefik.enable: true
+      traefik.http.routers.grafana.entryPoints: https
+      traefik.http.services.grafana.loadbalancer.server.port: 3000
+      traefik.http.routers.grafana.middlewares: auth@file
+  
+  backup:
+    image: offen/docker-volume-backup:v2
+    container_name: grafana-bp
+    environment:
+      BACKUP_FILENAME: backup-%Y-%m-%dT%H-%M-%S.tar.gz
+      BACKUP_PRUNING_PREFIX: backup-
+      BACKUP_CRON_EXPRESSION: {{ backup_cron }}
+      BACKUP_RETENTION_DAYS: {{ backup_retention }}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - grafana-data:/backup:ro
+      - /mnt/Data/Backups/plex:/archive
+
+networks:
+  proxy:
+    external: true
+
+volumes:
+  grafana-data:

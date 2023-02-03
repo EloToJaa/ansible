@@ -1,0 +1,31 @@
+- name: Include variables
+  include_vars: "debian.yml"
+
+- name: Install required system packages
+  package:
+    state: present
+    name: "{{ ngrok_deps }}"
+  become: true
+
+- name: Install ngrok
+  block:
+    - name: Add ngrok GPG apt Key
+      apt_key:
+        url: https://ngrok-agent.s3.amazonaws.com/ngrok.asc
+        state: present
+      become: true
+
+    - name: Add ngrok Repository
+      apt_repository:
+        repo: "deb https://ngrok-agent.s3.amazonaws.com buster main"
+        state: present
+      become: true
+
+- name: Update apt and install ngrok
+  block:
+    - name: Attempt installation
+      apt:
+        update_cache: yes
+        name: "{{ ngrok_packages }}"
+        state: present
+      become: true

@@ -1,0 +1,26 @@
+version: '3'
+services:
+  heimdall:
+    image: lscr.io/linuxserver/heimdall:latest
+    container_name: heimdall
+    environment:
+      - PUID={{ var.USER_UID }}
+      - PGID={{ var.USER_GID }}
+      - TZ={{ timezone }}
+    volumes:
+      - heimdall-config:/config
+    restart: unless-stopped
+    networks:
+      - proxy
+    labels:
+      traefik.enable: true
+      traefik.http.routers.heimdall.entryPoints: https
+      traefik.http.routers.heimdall.rule: Host(`{{ var.DOMAIN }}`, `local.{{ var.DOMAIN }}`)
+      traefik.http.routers.heimdall.middlewares: auth@file
+
+networks:
+  proxy:
+    external: true
+
+volumes:
+  heimdall-config:

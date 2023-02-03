@@ -1,0 +1,56 @@
+- name: Restart ssh
+  service:
+    name: ssh
+    state: restarted
+  when: ssh_public_key is defined
+
+- name: Notify the user
+  block:
+    - name: Schedule a reboot if required
+      stat:
+        path: /var/run/reboot-required
+      register: reboot_required
+
+    - name: Specify the action after user input
+      set_fact:
+        notify_action: "reboot to install the kernel updates"
+      when: reboot_required.stat.exists
+
+    - name: Specify the action after user input
+      set_fact:
+        notify_action: "restart the SSH daemon to apply its settings"
+      when: not reboot_required.stat.exists
+
+    - name: ""
+      when: ssh_public_key is not defined
+      pause:
+        prompt: |
+
+          Almost done! Now you need to copy the private SSH key to your host machine
+          1. Open a new terminal window
+
+          2. Type the following command: 
+          scp -P 22 root@YOUR_IP:/tmp/id_ssh_ed25519 ~/.ssh/id_vpn_{{ username }}
+
+          3. Test the SSH key by typing this command: 
+          ssh -p 22 {{ username }}@YOUR_IP -i ~/.ssh/id_vpn_{{ username }}
+          Make sure the password prompt says `Enter passphrase for key` and not `{{ username }}@YOUR_IP password`
+
+          4. After that's done, return to this terminal window and press [Enter]. 
+          Your system will {{ notify_action }}. You will be logged out automatically
+
+    - name: ""
+      when: ssh_public_key is defined
+      pause:
+        prompt: |
+
+          Almost done! Make sure to test your SSH connection in a new terminal window:
+          ssh -p {{ ssh_port }} {{ username }}@YOUR_IP -i ~/.ssh/path-to-your-key
+
+          After ensuring that it works, return to this terminal window and press [Enter]
+          Your system will {{ notify_action }}. You will be logged out automatically
+
+    - name: Reboot the system if updates are pending
+      when: reboot_required.stat.exists
+      command:
+        cmd: reboot

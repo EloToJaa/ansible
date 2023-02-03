@@ -1,0 +1,25 @@
+version: '3'
+services:
+  plex-meta-manager:
+    image: lscr.io/linuxserver/plex-meta-manager:latest
+    container_name: plex-meta-manager
+    environment:
+      - PUID={{ var.USER_UID }}
+      - PGID={{ var.USER_GID }}
+      - TZ={{ timezone }}
+      - PMM_TIME={{ pmm_time }}
+    volumes:
+      - pmm-config:/config
+      - {{ docker_dir }}/pmm/config.yml:/config/config.yml
+      - {{ docker_dir }}/pmm/TV.yml:/config/TV.yml
+      - {{ docker_dir }}/pmm/Movies.yml:/config/Movies.yml
+    restart: unless-stopped
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
+
+volumes:
+  pmm-config:

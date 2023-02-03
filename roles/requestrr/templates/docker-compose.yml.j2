@@ -1,0 +1,22 @@
+version: '3'
+services:
+  requestrr:
+    container_name: requestrr
+    image: darkalfx/requestrr
+    volumes:
+      - requestrr-data:/root/config
+    restart: unless-stopped
+    networks:
+      - proxy
+    labels:
+      traefik.enable: true
+      traefik.http.routers.requestrr.entryPoints: https
+      traefik.http.routers.requestrr.rule: Host(`requestrr.local.{{ var.DOMAIN }}`)
+      traefik.http.services.requestrr.loadbalancer.server.port: 4545
+
+networks:
+  proxy:
+    external: true
+
+volumes:
+  requestrr-data:

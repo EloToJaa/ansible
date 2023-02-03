@@ -1,0 +1,24 @@
+- name: Run desktop roles
+  roles:
+      - role: ngrok
+        when: software|select("equalto", "ngrok")
+
+      - role: fubarhouse.golang
+        become: true
+        when: software|select("equalto", "go")
+
+      - role: rust
+        when: software|select("equalto", "rust")
+
+      - role: professormanhattan.ruby
+        when: software|select("equalto", "ruby")
+
+      - role: ghidra
+        when: software|select("equalto", "ghidra")
+
+      - role: gdb
+        when: software|select("equalto", "gdb")
+
+      - role: samba
+        when: software|select("equalto", "samba")
+

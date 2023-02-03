@@ -1,0 +1,79 @@
+- name: Install tightvncserver
+  package:
+    name: tightvncserver
+    state: present
+  become: true
+
+- name: Install autocutsel
+  package:
+    name: autocutsel
+    state: present
+  become: true
+
+- name: Create .Xresources
+  file:
+    path: "{{ home }}/.Xresources"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    state: touch
+    mode: 0644
+
+- name: Create .vnc directory
+  file:
+    path: "{{ home }}/.vnc"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    state: directory
+
+- name: Create xstartup
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ home }}/.vnc/{{ item }}"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0754
+  with_items:
+    - xstartup
+
+- name: Set vnc password
+  shell: |
+    set -o pipefail
+    echo {{ vnc_password }} | vncpasswd -f > {{ home }}/.vnc/passwd
+  args:
+    chdir: "{{ home }}/.vnc"
+    creates: "{{ home }}/.vnc/passwd"
+    executable: /bin/bash
+
+- name: Set perms on vnc passwords
+  file:
+    path: "{{ home }}/.vnc/passwd"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0700
+
+- name: Create a vnc service
+  register: vnc_service
+  template:
+    src: "{{ item }}.j2"
+    dest: "/lib/systemd/system/{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - vnc@.service
+  become: true
+
+- name: Stop vnc
+  service:
+    name: "vnc@{{ vnc_display }}"
+    state: stopped
+  when: vnc_service.changed
+  become: true
+
+- name: Start and enable vnc
+  service:
+    name: "vnc@{{ vnc_display }}"
+    state: started
+    enabled: yes
+  when: vnc_service.changed
+  become: true

@@ -1,0 +1,68 @@
+- name: Ensure group sudo exists
+  group:
+    name: sudo
+    state: present
+  become: true
+
+- name: Allow sudo group to have passwordless sudo
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: "^%sudo"
+    line: "%sudo ALL=(ALL) NOPASSWD:ALL"
+    validate: "/usr/sbin/visudo -cf %s"
+  when: enable_passwordless_sudo | default(False)
+  become: true
+
+- name: Create a login user
+  user:
+    name: "{{ username }}"
+    password: "{{ user_password | string | password_hash('sha512') }}"
+    groups:
+      - sudo
+      - users
+    state: present
+    append: true
+    shell: "{{ user_shell }}"
+  when: enable_username_creation | default(False)
+  become: true
+
+- name: Ensure group "{{ username }}" exists
+  group:
+    name: "{{ username }}"
+    state: present
+  when: enable_username_creation | default(False)
+  become: true
+
+- name: Chmod the user home directory
+  file:
+    path: "{{ home }}"
+    state: directory
+    mode: 0755
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    recurse: yes
+  when: enable_username_creation | default(False)
+  become: true
+
+- name: Check if the Ansible playbook is copied to the new user directory
+  stat:
+    path: "{{ home }}/{{ repo_name }}"
+  register: playbook_copied
+
+- name: Copy the Ansible playbook to the new user
+  copy:
+    src: "/{{ home }}/{{ repo_name }}"
+    dest: "{{ home }}"
+    owner: "{{ username }}"
+    decrypt: no
+    group: "{{ username }}"
+    mode: 0750
+  when: not playbook_copied.stat.exists
+
+- name: Delete directories
+  file:
+    path: "/{{ home }}/{{ item }}"
+    state: absent
+  with_items: "{{ dirs }}"
+  become: true

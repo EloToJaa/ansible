@@ -1,0 +1,17 @@
+[Unit]
+Description=Start TigerVNC at startup.
+After=syslog.target network.target
+
+[Service]
+Type=simple
+User={{ username }}
+Group={{ username }}
+WorkingDirectory={{ home }}
+
+PIDFile={{ home }}/.vnc/%H:%i.pid
+ExecStartPre=-/usr/bin/vncserver -kill :%i
+ExecStart=/usr/bin/vncserver :%i -geometry {{ vnc_resolution }}
+ExecStop=/usr/bin/vncserver -kill :%i
+
+[Install]
+WantedBy=multi-user.target

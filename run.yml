@@ -1,0 +1,20 @@
+#!/usr/bin/env ansible-playbook
+
+- hosts: all
+  become: false
+
+  vars_files:
+      - options.yml
+      - secret.yml
+      - "{{ version }}.yml"
+
+  roles:
+      - role: basic
+
+      - role: desktop
+
+      - role: kali
+
+      - role: server
+
+      - role: finish

@@ -1,0 +1,92 @@
+- name: Run server roles
+  roles:
+      - role: postgres
+        when: software|select("equalto", "postgres")
+
+      - role: redis
+        when: software|select("equalto", "redis")
+
+      - role: authelia
+        when: software|select("equalto", "authelia")
+
+      - role: traefik
+        when: software|select("equalto", "traefik")
+
+      - role: adminer
+        when: software|select("equalto", "adminer")
+
+      - role: apache
+        when: software|select("equalto", "apache")
+
+      - role: bazarr
+        when: software|select("equalto", "bazarr")
+
+      - role: cloudflare-ddns
+        when: software|select("equalto", "cloudflare-ddns")
+
+      - role: guacamole
+        when: software|select("equalto", "guacamole")
+
+      - role: heimdall
+        when: software|select("equalto", "heimdall")
+
+      - role: notifiarr
+        when: software|select("equalto", "notifiarr")
+
+      - role: ombi
+        when: software|select("equalto", "ombi")
+
+      - role: plex
+        when: software|select("equalto", "plex")
+
+      - role: plextrakt
+        when: software|select("equalto", "plextrakt")
+
+      - role: pmm
+        when: software|select("equalto", "pmm")
+
+      - role: portainer
+        when: software|select("equalto", "portainer")
+
+      - role: radarr
+        when: software|select("equalto", "radarr")
+
+      - role: redis-commander
+        when: software|select("equalto", "redis-commander")
+
+      - role: requestrr
+        when: software|select("equalto", "requestrr")
+
+      - role: shlink
+        when: software|select("equalto", "shlink")
+
+      - role: sonarr
+        when: software|select("equalto", "sonarr")
+
+      - role: tautulli
+        when: software|select("equalto", "tautulli")
+
+      - role: torrenting
+        when: software|select("equalto", "torrenting")
+
+      - role: uptime
+        when: software|select("equalto", "uptime")
+
+      - role: vaultwarden
+        when: software|select("equalto", "vaultwarden")
+
+      - role: watchtower
+        when: software|select("equalto", "watchtower")
+
+      - role: nodeexporter
+        when: software|select("equalto", "nodeexporter")
+
+      - role: cadvisor
+        when: software|select("equalto", "cadvisor")
+
+      - role: prometheus
+        when: software|select("equalto", "prometheus")
+
+      - role: grafana
+        when: software|select("equalto", "grafana")
+      

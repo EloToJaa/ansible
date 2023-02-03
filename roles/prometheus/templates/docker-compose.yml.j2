@@ -1,0 +1,29 @@
+version: '3'
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    volumes:
+      - {{ docker_dir }}/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    restart: unless-stopped
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+    networks:
+      - proxy
+      - monitoring
+    labels:
+      traefik.enable: true
+      traefik.http.routers.prometheus.entryPoints: https
+      traefik.http.services.prometheus.loadbalancer.server.port: 9090
+      traefik.http.routers.prometheus.middlewares: auth@file
+      traefik.http.routers.prometheus.rule: Host(`prometheus.local.{{ var.DOMAIN }}`)
+
+networks:
+  proxy:
+    external: true
+  monitoring:
+    external: true
+
+volumes:
+  prometheus-data:

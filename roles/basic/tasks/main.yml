@@ -1,0 +1,12 @@
+- name: Run basic roles
+  roles:
+      - role: vaulttec.zsh
+        when: software|select("equalto", "zsh")
+
+      - role: system
+
+      - role: ssh
+        when: software|select("equalto", "ssh")
+      
+      - role: docker
+        when: software|select("equalto", "docker")

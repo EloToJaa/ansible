@@ -1,0 +1,11 @@
+---
+sublime_deps:
+  - 'apt-transport-https'
+  - 'gnupg2'
+  - 'curl'
+  - 'software-properties-common'
+  - 'ca-certificates'
+  - 'wget'
+
+sublime_packages:
+  - 'sublime-text'

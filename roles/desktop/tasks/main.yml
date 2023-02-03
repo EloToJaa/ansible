@@ -1,0 +1,13 @@
+- name: Run desktop roles
+  roles:
+      - role: vnc
+        when: software|select("equalto", "vnc")
+
+      - role: professormanhattan.bravebrowser
+        when: software|select("equalto", "brave")
+
+      - role: vscode
+        when: software|select("equalto", "vscode")
+
+      - role: sublime
+        when: software|select("equalto", "sublime")

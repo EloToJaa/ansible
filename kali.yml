@@ -1,0 +1,32 @@
+software:
+  - docker
+  - ssh
+  - vnc
+  - samba
+  - brave
+  - vscode
+  - sublime
+  - ngrok
+  - go
+  - rust
+  - ruby
+  - ghidra
+  - gdb
+  - pyenv
+  - nvm
+  - qemu
+
+apt_software:
+  - terminator
+  - jadx
+  - apktool
+  - gcc
+  - g++
+  - make
+    
+pip_software:
+  - black
+
+pipx_software:
+  - pwntools
+  - pwncat-cs

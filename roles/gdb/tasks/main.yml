@@ -1,0 +1,49 @@
+
+- name: Download pwndbg
+  git:
+    repo: https://github.com/pwndbg/pwndbg.git
+    dest: "{{ home }}/pwndbg/"
+    clone: yes
+    update: yes
+
+- name: Download peda
+  git:
+    repo: https://github.com/longld/peda.git
+    dest: "{{ home }}/peda/"
+    clone: yes
+    update: yes
+
+- name: Download gef
+  git:
+    repo: https://github.com/hugsy/gef.git
+    dest: "{{ home }}/gef/"
+    clone: yes
+    update: yes
+
+- name: Run a pwndbg setup script
+  script:
+    chdir: "{{ home }}/pwndbg/"
+    cmd: "{{ home }}/pwndbg/setup.sh"
+
+- name: Update .gdbinit file
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ home }}/{{ item }}"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0755
+  with_items:
+    - .gdbinit
+
+- name: Create run files
+  template:
+    src: "gdb-mod.j2"
+    dest: "/usr/bin/gdb-{{ item }}"
+    owner: root
+    group: root
+    mode: 0755
+  with_items:
+    - pwndbg
+    - peda
+    - gef
+  become: true

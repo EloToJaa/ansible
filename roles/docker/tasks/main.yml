@@ -1,0 +1,63 @@
+---
+- name: Set amd64 arch
+  set_fact:
+    repo_arch: amd64
+  when: ansible_architecture == "x86_64"
+
+- name: Set arm64 arch
+  set_fact:
+    repo_arch: "{{ ansible_architecture }}"
+  when: (ansible_architecture == "arm64") or (ansible_architecture == "aarch64")
+
+- name: Include variables
+  include_vars: "debian.yml"
+
+- name: Install required system packages
+  package:
+    state: present
+    name: "{{ docker_deps }}"
+  become: true
+
+- name: Install docker
+  package:
+    state: present
+    name: docker
+  become: true
+
+- name: Ensure group docker exists
+  group:
+    name: docker
+    state: present
+  become: true
+
+- name: Add user "{{ username }}" to group docker
+  user:
+    name: "{{ username }}"
+    groups:
+      - docker
+    append: yes
+  become: true
+
+- name: Install Docker Module for Python
+  pip:
+    name: docker
+  become: true
+
+- name: Make sure Docker is running and enabled
+  systemd:
+    name: docker
+    daemon_reload: yes
+    state: started
+    enabled: yes
+  become: true
+
+- name: Create proxy network
+  community.docker.docker_network:
+    name: proxy
+  become: true
+
+- name: Create monitoring network
+  community.docker.docker_network:
+    name: monitoring
+  when: software|select("equalto", "prometheus")
+  become: true

@@ -1,0 +1,47 @@
+software:
+  - ssh
+  - samba
+  - docker
+  - adminer
+  - apache
+  - authelia
+  - bazarr
+  - cloudflare-ddns
+  - guacamole
+  - heimdall
+  - notifiarr
+  - ombi
+  - plex
+  - plextrakt
+  - pmm
+  - portainer
+  - postgres
+  - radarr
+  - redis
+  - redis-commander
+  - requestrr
+  - shlink
+  - sonarr
+  - tautulli
+  - torrenting
+  - traefik
+  - uptime
+  - vaultwarden
+  - watchtower
+  - cadvisor
+  - nodeexporter
+  - prometheus
+  - grafana
+
+apt_software:
+  - gcc
+  - g++
+  - make
+  - network-manager
+  - locales
+  - python3
+  - pip
+  - git
+  - nano
+  - vim
+  - qemu-guest-agent

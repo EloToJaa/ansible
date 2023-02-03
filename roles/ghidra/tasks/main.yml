@@ -1,0 +1,16 @@
+- name: Install ghidra
+  package:
+    state: present
+    name: ghidra
+  become: true
+
+- name: Copy ghidra-auto script configuration files in place
+  template:
+    src: "{{ item }}.j2"
+    dest: "/usr/local/bin/{{ item }}"
+    owner: root
+    group: root
+    mode: 0755
+  with_items:
+    - "{{ ghidra_auto_command_name }}"
+  become: true

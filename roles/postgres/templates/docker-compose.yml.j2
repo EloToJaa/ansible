@@ -1,0 +1,23 @@
+version: '3'
+services:
+  postgres:
+    image: postgres
+    container_name: postgres
+    environment:
+      - POSTGRES_USER={{ var.POSTGRES_USER }}
+      - POSTGRES_PASSWORD={{ var.POSTGRES_PASSWORD }}
+      - POSTGRES_DB=database
+    volumes:
+      - postgresql-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    restart: always
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
+
+volumes:
+  postgresql-data:

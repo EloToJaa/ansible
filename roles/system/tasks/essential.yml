@@ -1,0 +1,81 @@
+- name: Update and upgrade apt packages
+  apt:
+    upgrade: yes
+    autoremove: yes
+    update_cache: yes
+  become: true
+
+- name: Install unattended upgrades package
+  package:
+    name: unattended-upgrades
+    state: present
+  become: true
+
+- name: Copy unattended-upgrades configuration files in place
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/apt/apt.conf.d/{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - 10periodic
+    - 50unattended-upgrades
+  become: true
+
+- name: Update apt and install software
+  block:
+    - name: apt software
+      package:
+        update_cache: yes
+        name: "{{ apt_software }}"
+        state: present
+      become: true
+
+- name: Generate the locale
+  locale_gen:
+    name: "{{ locale }}"
+    state: present
+  become: true
+
+- name: Update SSH configuration to be more secure
+  register: ssh_config
+  lineinfile:
+    dest: "/etc/systemd/resolved.conf"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+    mode: 0644
+  with_items:
+    - regexp: "^#?DNS="
+      line: "DNS=192.168.0.40"
+    - regexp: "^#?FallbackDNS="
+      line: "FallbackDNS=1.1.1.1"
+    - regexp: "^#?DNSStubListener="
+      line: "DNSStubListener=no"
+  become: true
+
+- name: Create a symlink
+  file:
+    src: "/run/systemd/resolve/resolv.conf"
+    dest: "/etc/resolv.conf"
+    state: link
+  become: true
+
+- name: Populate service facts
+  service_facts:
+
+- name: Stop systemd-resolved
+  service:
+    name: systemd-resolved
+    state: stopped
+  when: "'systemd-resolved.service' in ansible_facts.services"
+  become: true
+
+- name: Start and enable systemd-resolved
+  service:
+    name: systemd-resolved
+    state: started
+    enabled: yes
+  when: "'systemd-resolved.service' in ansible_facts.services"
+  become: true

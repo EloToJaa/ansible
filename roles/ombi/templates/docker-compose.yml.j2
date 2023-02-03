@@ -1,0 +1,24 @@
+version: '3'
+services:
+  request:
+    image: lscr.io/linuxserver/ombi:latest
+    container_name: ombi
+    environment:
+      - PUID={{ var.USER_UID }}
+      - PGID={{ var.USER_GID }}
+      - TZ={{ timezone }}
+    volumes:
+      - ombi-config:/config
+    restart: unless-stopped
+    networks:
+      - proxy
+    labels:
+      traefik.enable: true
+      traefik.http.routers.ombi.entryPoints: https
+
+networks:
+  proxy:
+    external: true
+
+volumes:
+  ombi-config:

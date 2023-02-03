@@ -1,0 +1,12 @@
+---
+roles:
+  - name: professormanhattan.bravebrowser
+  - name: fubarhouse.golang
+  - name: professormanhattan.ruby
+  - name: vaulttec.zsh
+collections:
+  - name: google.cloud
+  - name: community.docker
+  - name: community.general
+  - name: community.crypto
+  - name: ansible.posix

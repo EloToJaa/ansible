@@ -1,0 +1,25 @@
+version: '3'
+services:
+  stats:
+    image: lscr.io/linuxserver/tautulli:latest
+    container_name: tautulli
+    environment:
+      - PUID={{ var.USER_UID }}
+      - PGID={{ var.USER_GID }}
+      - TZ={{ timezone }}
+      - DOCKER_MODS=ghcr.io/gilbn/theme.park:tautulli
+    volumes:
+      - tautulli-data:/config
+    restart: unless-stopped
+    networks:
+      - proxy
+    labels:
+      traefik.enable: true
+      traefik.http.routers.tautulli.entryPoints: https
+
+networks:
+  proxy:
+    external: true
+
+volumes:
+  tautulli-data:

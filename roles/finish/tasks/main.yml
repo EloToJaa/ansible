@@ -1,0 +1,46 @@
+- name: Remove file link from .zshrc
+  lineinfile:
+    path: "{{ home }}/.zshrc"
+    regexp: "^source .HOME\/.user_settings$"
+    state: absent
+    
+- name: Add file link from .zshrc
+  lineinfile:
+    path: "{{ home }}/.zshrc"
+    line: "source $HOME/.user_settings"
+    insertafter: EOF
+
+- name: Create a link to spaceship theme
+  file:
+    src: "{{ home }}/.oh-my-zsh/custom/themes/spaceship/spaceship.zsh-theme"
+    dest: "{{ home }}/.oh-my-zsh/custom/spaceship.zsh-theme"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    state: link
+
+- name: Create .user_settings file
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ home }}/{{ item }}"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0755
+  with_items:
+    - .user_settings
+    - .spaceshiprc.zsh
+
+- name: Change ownership of directories
+  file:
+    state: directory
+    recurse: yes
+    path: "/{{ home }}/{{ item }}"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0755
+  with_items: "{{ dirs }}"
+  become: true
+
+- name: Remove playbook
+  file:
+    path: "{{ playbook_dir }}"
+    state: absent

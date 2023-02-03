@@ -1,0 +1,117 @@
+# Please don't edit this file directly! It will be reset when you update the git repository
+# Instead, put your variable customizations into custom.yml
+
+all:
+  hosts:
+    localhost:
+      ansible_connection: local
+
+  vars:
+    username: "{{ user.username }}"
+    user_password: "{{ user.password }}"
+    home: "/home/{{ username }}"
+
+    vnc_password: "{{ vnc.password }}"
+
+    enable_username_creation: yes
+
+    user_shell: /usr/bin/zsh
+
+    enable_passwordless_sudo: yes
+
+    # Whether or not you want to generate a public key pair for SSH auth
+    # The playbook will not generate a new pair if $HOME/.ssh/authorized_keys exists and isn't empty
+    enable_ssh_keygen: yes
+
+    ssh_public_key: "{{ ssh.public_key }}"
+
+    # Language and time settings
+    # Check here for the list of possible locales
+    # https://docs.oracle.com/cd/E23824_01/html/E26033/glset.html
+    locale: en_US.UTF-8
+
+    timezone: Europe/Warsaw
+
+    notifications: true
+
+    repo_name: ansible
+
+    # Set the time at which the system should reboot after installing updates (24H format)
+    autoupdate_reboot_time: 03:00
+    pmm_time: 03:00
+
+    run_containers: true
+
+    docker_dir: "/opt/docker"
+    data_dir: "/data"
+
+    set_static: false
+
+    # You can set it to a different port in order to avoid automated scanner bots
+    ssh_port: 22
+
+    vnc_resolution: 1920x1080
+    vnc_display: 1
+
+    apt_software:
+      - gcc
+      - g++
+      - make
+    
+    pip_software: []
+    pipx_software: []
+    
+    go_version: 1.19.1
+    go_install_clean: true
+    golang_shell_profile: "{{ home }}/.zshrc"
+    GOPATH: "{{ home }}/go"
+    GOROOT: /usr/local/go
+    GOPROXY: https://proxy.golang.org
+
+    conf:
+      shell: zsh
+      specifics: true
+      parallel: true
+
+    zsh_user:
+      - "{{ username }}"
+
+    zsh_debug_startup_time: false
+
+    zsh_ohmy_theme: spaceship
+
+    zsh_ohmy_custom_plugins:
+      - name: zsh-syntax-highlighting
+        repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git"
+      - name: zsh-autosuggestions
+        repo: "https://github.com/zsh-users/zsh-autosuggestions.git"
+    
+    zsh_ohmy_custom_themes:
+      - name: spaceship
+        repo: "https://github.com/spaceship-prompt/spaceship-prompt.git"
+
+    zsh_ohmy_plugins:
+      - zsh-syntax-highlighting
+      - zsh-autosuggestions
+      - command-not-found
+      - git
+      - git-flow
+      - docker
+      - docker-compose
+      - node
+      - npm
+      - ruby
+      - rust
+      - golang
+      - dotnet
+      - dotenv
+      - python
+      - vscode
+
+    zsh_ohmy_disable_auto_update: false
+
+    dirs:
+      - go
+      - pwndbg
+      - peda
+      - gef

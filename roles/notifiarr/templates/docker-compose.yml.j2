@@ -1,0 +1,33 @@
+version: '3'
+services:
+  notifiarr:
+    container_name: notifiarr
+    image: golift/notifiarr
+    privileged: true
+    environment:
+      - DN_API_KEY={{ var.NOTIFIARR_API }}
+      - DN_RADARR_0_NAME=radarr
+      - DN_RADARR_0_URL=http://radarr:7878
+      - DN_RADARR_0_API_KEY={{ var.RADARR_API }}
+      - DN_SONARR_0_NAME=sonarr
+      - DN_SONARR_0_URL=http://sonarr:8989
+      - DN_SONARR_0_API_KEY={{ var.SONARR_API }}
+      - DN_PLEX_URL=http://{{ var.IP }}:32400
+      - DN_PLEX_TOKEN={{ var.PLEX_TOKEN }}
+      - DN_TAUTULLI_NAME=tautulli
+      - DN_TAUTULLI_URL=http://stats:8181
+      - DN_TAUTULLI_API_KEY={{ var.TAUTULLI_API }}
+    volumes:
+      - /var/run/utmp:/var/run/utmp
+      - {{ docker_dir }}/notifiarr/notifiarr.conf:/config/notifiarr.conf
+    restart: always
+    networks:
+      - proxy
+    labels:
+      traefik.enable: true
+      traefik.http.routers.notifiarr.entryPoints: https
+      traefik.http.services.notifiarr.loadbalancer.server.port: 5454
+
+networks:
+  proxy:
+    external: true

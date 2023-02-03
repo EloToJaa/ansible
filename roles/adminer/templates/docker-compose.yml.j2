@@ -1,0 +1,19 @@
+version: '3'
+services:
+  adminer:
+    image: adminer
+    container_name: adminer
+    volumes:
+      - {{ docker_dir }}/adminer/adminer.css:/var/www/html/adminer.css
+    networks:
+      - proxy
+    labels:
+      traefik.enable: true
+      traefik.http.routers.adminer.entryPoints: https
+      traefik.http.routers.adminer.middlewares: auth@file
+    restart: unless-stopped
+
+networks:
+  proxy:
+
+    external: true

@@ -1,0 +1,30 @@
+- name: Include variables
+  include_vars: "debian.yml"
+- name: Install required system packages
+  package:
+    state: present
+    name: "{{ code_deps }}"
+  become: true
+
+- name: Install Visual Studio Code
+  block:
+    - name: Add VS Code GPG apt Key
+      apt_key:
+        url: https://packages.microsoft.com/keys/microsoft.asc
+        state: present
+      become: true
+
+    - name: Add VS Code Repository
+      apt_repository:
+        repo: "deb [arch={{ repo_arch }}] https://packages.microsoft.com/repos/vscode stable main"
+        state: present
+      become: true
+
+- name: Update apt and install code
+  block:
+    - name: Attempt installation
+      apt:
+        update_cache: yes
+        name: "{{ code_packages }}"
+        state: present
+      become: true

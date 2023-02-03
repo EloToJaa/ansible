@@ -1,0 +1,20 @@
+version: '3'
+services:
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: redis-commander
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PASSWORD={{ var.REDIS_PASSWORD }}
+    restart: unless-stopped
+    networks:
+      - proxy
+    labels:
+      traefik.enable: true
+      traefik.http.routers.redis-commander.entryPoints: https
+      traefik.http.routers.redis-commander.rule: Host(`redis.{{ var.DOMAIN }}`, `redis.local.{{ var.DOMAIN }}`)
+      traefik.http.routers.redis-commander.middlewares: auth@file
+
+networks:
+  proxy:
+    external: true

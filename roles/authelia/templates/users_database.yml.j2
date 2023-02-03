@@ -1,0 +1,8 @@
+users:
+  elotoja: #username
+    displayname: {{ var.AUTH_USER }}
+    password: {{ var.AUTH_PASSWORD }} #https://argon2.online/
+    email: {{ var.AUTH_EMAIL }}
+    groups:
+      - admins
+      - dev

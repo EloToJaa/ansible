@@ -1,0 +1,25 @@
+version: '3'
+services:
+  shlink:
+    image: shlinkio/shlink:stable
+    container_name: shlink
+    environment:
+      - DEFAULT_DOMAIN={{ var.SHLINK_DOMAIN }}
+      - IS_HTTPS_ENABLED=true
+      - GEOLITE_LICENSE_KEY={{ var.GEOLITE_LICENSE_KEY }}
+      - DB_DRIVER=postgres
+      - DB_HOST=postgres
+      - DB_NAME=shlink
+      - DB_USER={{ var.POSTGRES_USER }}
+      - DB_PASSWORD={{ var.POSTGRES_PASSWORD }}
+    restart: unless-stopped
+    networks:
+      - proxy
+    labels:
+      traefik.enable: true
+      traefik.http.routers.shlink.entryPoints: https
+      traefik.http.routers.shlink.rule: Host(`l.{{ var.DOMAIN }}`, `l.local.{{ var.DOMAIN }}`)
+
+networks:
+  proxy:
+    external: true
