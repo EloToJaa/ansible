@@ -40,7 +40,6 @@ sudo apt install -y git python3-pip python3-venv
 echo "Installing pipx"
 pip install --user pipx
 python3 -m pipx ensurepath
-python3 -m pipx ensurepip
 
 # install ansible
 echo "Installing ansible"
