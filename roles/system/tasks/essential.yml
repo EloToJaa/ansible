@@ -34,13 +34,11 @@
   pip:
     name: "{{ pip_software }}"
     state: latest
-  become: true
 
 - name: Install pipx software
   community.general.pipx:
     name: "{{ pipx_software }}"
     state: latest
-  become: true
 
 - name: Generate the locale
   locale_gen:
