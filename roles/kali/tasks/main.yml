@@ -3,11 +3,12 @@
     name: ngrok
   when: software|select("equalto", "ngrok")
 
-- name: Install go
+- block:
+    - name: Install go
+      include_role:
+        name: fubarhouse.golang
+      when: software|select("equalto", "go")
   become: true
-  include_role:
-    name: fubarhouse.golang
-  when: software|select("equalto", "go")
 
 - name: Install rust
   include_role:
