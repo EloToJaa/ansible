@@ -89,7 +89,7 @@ elif [ $version = "custom" ]; then
         echo "custom.yml file not found"
         exit 1
     fi
-    mv ../custom.yml .
+    mv ../custom.yml ./config/custom.yml
     ansible-playbook run.yml --extra-vars "version=custom"
 else
     echo "Invalid version"
