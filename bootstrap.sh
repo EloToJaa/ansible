@@ -94,3 +94,16 @@ elif [ $version = "custom" ]; then
 else
     echo "Invalid version"
 fi
+
+# ask to remove files
+echo "Do you want to remove files? (y/n)"
+read remove
+if [ $remove = "y" ]; then
+    echo "Removing files"
+    cd ..
+    rm -rf ansible
+    rm secret.yml
+    rm options.yml
+else
+    echo "Not removing files"
+fi
