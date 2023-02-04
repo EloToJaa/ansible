@@ -37,8 +37,9 @@
 
 - name: Install pipx software
   community.general.pipx:
-    name: "{{ pipx_software }}"
+    name: "{{ item }}"
     state: latest
+  with_items: "{{ pipx_software }}"
 
 - name: Generate the locale
   locale_gen:
