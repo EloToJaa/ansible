@@ -49,9 +49,14 @@ pipx install ansible
 echo "Cloning github repo"
 git clone https://github.com/elotojaa/ansible
 
-# run ansible playbook
+# move files
+echo "Moving files"
 cd ansible
 mv ../secret.yml .
+mv ../options.yml .
+
+# run ansible playbook
+echo "Running ansible playbook"
 ansible-galaxy install -r requirements.yml
 
 # ask for version to install
