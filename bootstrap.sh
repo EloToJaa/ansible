@@ -52,8 +52,8 @@ git clone https://github.com/elotojaa/ansible
 # move files
 echo "Moving files"
 cd ansible
-mv ../secret.yml .
-mv ../options.yml .
+cp ../secret.yml .
+cp ../options.yml .
 
 # run ansible playbook
 echo "Running ansible playbook"
