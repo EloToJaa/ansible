@@ -1,21 +1,30 @@
-- name: Run desktop roles
-  roles:
-      - role: ngrok
-        when: software|select("equalto", "ngrok")
+- name: Install ngrok
+  include_role:
+    name: ngrok
+  when: software|select("equalto", "ngrok")
 
-      - role: fubarhouse.golang
-        become: true
-        when: software|select("equalto", "go")
+- name: Install go
+  include_role:
+    name: fubarhouse.golang
+  become: true
+  when: software|select("equalto", "go")
 
-      - role: rust
-        when: software|select("equalto", "rust")
+- name: Install rust
+  include_role:
+    name: rust
+  when: software|select("equalto", "rust")
 
-      - role: professormanhattan.ruby
-        when: software|select("equalto", "ruby")
+- name: Install ruby
+  include_role:
+    name: professormanhattan.ruby
+  when: software|select("equalto", "ruby")
 
-      - role: ghidra
-        when: software|select("equalto", "ghidra")
+- name: Install ghidra
+  include_role:
+    name: ghidra
+  when: software|select("equalto", "ghidra")
 
-      - role: gdb
-        when: software|select("equalto", "gdb")
-
+- name: Install gdb
+  include_role:
+    name: gdb
+  when: software|select("equalto", "gdb")

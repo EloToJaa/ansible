@@ -1,92 +1,149 @@
-- name: Run server roles
-  roles:
-      - role: postgres
-        when: software|select("equalto", "postgres")
+- name: Install postgres
+  include_role:
+    name: postgres
+  when: software|select("equalto", "postgres")
 
-      - role: redis
-        when: software|select("equalto", "redis")
+- name: Install redis
+  include_role:
+    name: redis
+  when: software|select("equalto", "redis")
 
-      - role: authelia
-        when: software|select("equalto", "authelia")
+- name: Install authelia
+  include_role:
+    name: authelia
+  when: software|select("equalto", "authelia")
 
-      - role: traefik
-        when: software|select("equalto", "traefik")
+- name: Install traefik
+  include_role:
+    name: traefik
+  when: software|select("equalto", "traefik")
 
-      - role: adminer
-        when: software|select("equalto", "adminer")
+- name: Install adminer
+  include_role:
+    name: adminer
+  when: software|select("equalto", "adminer")
 
-      - role: apache
-        when: software|select("equalto", "apache")
+- name: Install apache
+  include_role:
+    name: apache
+  when: software|select("equalto", "apache")
 
-      - role: bazarr
-        when: software|select("equalto", "bazarr")
+- name: Install bazarr
+  include_role:
+    name: bazarr
+  when: software|select("equalto", "bazarr")
 
-      - role: cloudflare-ddns
-        when: software|select("equalto", "cloudflare-ddns")
+- name: Install cloudflare-ddns
+  include_role:
+    name: cloudflare-ddns
+  when: software|select("equalto", "cloudflare-ddns")
 
-      - role: guacamole
-        when: software|select("equalto", "guacamole")
+- name: Install guacamole
+  include_role:
+    name: guacamole
+  when: software|select("equalto", "guacamole")
 
-      - role: heimdall
-        when: software|select("equalto", "heimdall")
+- name: Install heimdall
+  include_role:
+    name: heimdall
+  when: software|select("equalto", "heimdall")
 
-      - role: notifiarr
-        when: software|select("equalto", "notifiarr")
+- name: Install notifiarr
+  include_role:
+    name: notifiarr
+  when: software|select("equalto", "notifiarr")
 
-      - role: ombi
-        when: software|select("equalto", "ombi")
+- name: Install ombi
+  include_role:
+    name: ombi
+  when: software|select("equalto", "ombi")
 
-      - role: plex
-        when: software|select("equalto", "plex")
+- name: Install plex
+  include_role:
+    name: plex
+  when: software|select("equalto", "plex")
 
-      - role: plextrakt
-        when: software|select("equalto", "plextrakt")
+- name: Install plextrakt
+  include_role:
+    name: plextrakt
+  when: software|select("equalto", "plextrakt")
 
-      - role: pmm
-        when: software|select("equalto", "pmm")
+- name: Install pmm
+  include_role:
+    name: pmm
+  when: software|select("equalto", "pmm")
 
-      - role: portainer
-        when: software|select("equalto", "portainer")
+- name: Install portainer
+  include_role:
+    name: portainer
+  when: software|select("equalto", "portainer")
 
-      - role: radarr
-        when: software|select("equalto", "radarr")
+- name: Install radarr
+  include_role:
+    name: radarr
+  when: software|select("equalto", "radarr")
 
-      - role: redis-commander
-        when: software|select("equalto", "redis-commander")
+- name: Install redis-commander
+  include_role:
+    name: redis-commander
+  when: software|select("equalto", "redis-commander")
 
-      - role: requestrr
-        when: software|select("equalto", "requestrr")
+- name: Install requestrr
+  include_role:
+    name: requestrr
+  when: software|select("equalto", "requestrr")
 
-      - role: shlink
-        when: software|select("equalto", "shlink")
+- name: Install shlink
+  include_role:
+    name: shlink
+  when: software|select("equalto", "shlink")
 
-      - role: sonarr
-        when: software|select("equalto", "sonarr")
+- name: Install sonarr
+  include_role:
+    name: sonarr
+  when: software|select("equalto", "sonarr")
 
-      - role: tautulli
-        when: software|select("equalto", "tautulli")
+- name: Install tautulli
+  include_role:
+    name: tautulli
+  when: software|select("equalto", "tautulli")
 
-      - role: torrenting
-        when: software|select("equalto", "torrenting")
+- name: Install torrenting
+  include_role:
+    name: torrenting
+  when: software|select("equalto", "torrenting")
 
-      - role: uptime
-        when: software|select("equalto", "uptime")
+- name: Install uptime
+  include_role:
+    name: uptime
+  when: software|select("equalto", "uptime")
 
-      - role: vaultwarden
-        when: software|select("equalto", "vaultwarden")
+- name: Install vaultwarden
+  include_role:
+    name: vaultwarden
+  when: software|select("equalto", "vaultwarden")
 
-      - role: watchtower
-        when: software|select("equalto", "watchtower")
+- name: Install watchtower
+  include_role:
+    name: watchtower
+  when: software|select("equalto", "watchtower")
 
-      - role: nodeexporter
-        when: software|select("equalto", "nodeexporter")
+- name: Install nodeexporter
+  include_role:
+    name: nodeexporter
+  when: software|select("equalto", "nodeexporter")
 
-      - role: cadvisor
-        when: software|select("equalto", "cadvisor")
+- name: Install cadvisor
+  include_role:
+    name: cadvisor
+  when: software|select("equalto", "cadvisor")
 
-      - role: prometheus
-        when: software|select("equalto", "prometheus")
+- name: Install prometheus
+  include_role:
+    name: prometheus
+  when: software|select("equalto", "prometheus")
 
-      - role: grafana
-        when: software|select("equalto", "grafana")
-      
+- name: Install grafana
+  include_role:
+    name: grafana
+  when: software|select("equalto", "grafana")

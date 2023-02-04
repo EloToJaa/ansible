@@ -1,15 +1,23 @@
-- name: Run basic roles
-  roles:
-      - role: vaulttec.zsh
-        when: software|select("equalto", "zsh")
+- name: Install zsh
+  include_role:
+    name: vaulttec.zsh
+  when: software|select("equalto", "zsh")
 
-      - role: system
+- name: Install system
+  include_role:
+    name: system
 
-      - role: ssh
-        when: software|select("equalto", "ssh")
-      
-      - role: docker
-        when: software|select("equalto", "docker")
-      
-      - role: samba
-        when: software|select("equalto", "samba")
+- name: Install ssh
+  include_role:
+    name: ssh
+  when: software|select("equalto", "ssh")
+
+- name: Install docker
+  include_role:
+    name: docker
+  when: software|select("equalto", "docker")
+
+- name: Install samba
+  include_role:
+    name: samba
+  when: software|select("equalto", "samba")

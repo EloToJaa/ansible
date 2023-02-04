@@ -50,6 +50,13 @@ else
     echo "Ansible is installed"
 fi
 
+# check if ansible dir exists if it does delete it
+if [ -d "ansible" ]; then
+    echo "Ansible dir exists"
+    echo "Deleting ansible dir"
+    rm -rf ansible
+fi
+
 # clone github repo
 echo "Cloning github repo"
 git clone https://github.com/elotojaa/ansible

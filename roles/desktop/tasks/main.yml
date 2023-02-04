@@ -1,13 +1,19 @@
-- name: Run desktop roles
-  roles:
-      - role: vnc
-        when: software|select("equalto", "vnc")
+- name: Install vnc
+  include_role:
+    name: vnc
+  when: software|select("equalto", "vnc")
 
-      - role: professormanhattan.bravebrowser
-        when: software|select("equalto", "brave")
+- name: Install brave
+  include_role:
+    name: professormanhattan.bravebrowser
+  when: software|select("equalto", "brave")
 
-      - role: vscode
-        when: software|select("equalto", "vscode")
+- name: Install vscode
+  include_role:
+    name: vscode
+  when: software|select("equalto", "vscode")
 
-      - role: sublime
-        when: software|select("equalto", "sublime")
+- name: Install sublime
+  include_role:
+    name: sublime
+  when: software|select("equalto", "sublime")
