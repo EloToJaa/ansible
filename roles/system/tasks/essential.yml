@@ -55,12 +55,12 @@
       line: "DNSStubListener=no"
   become: true
 
-- name: Create a symlink
-  file:
-    src: "/run/systemd/resolve/resolv.conf"
-    dest: "/etc/resolv.conf"
-    state: link
-  become: true
+# - name: Create a symlink
+#   file:
+#     src: "/run/systemd/resolve/resolv.conf"
+#     dest: "/etc/resolv.conf"
+#     state: link
+#   become: true
 
 - name: Populate service facts
   service_facts:
