@@ -6,7 +6,7 @@
   vars_files:
       - options.yml
       - secret.yml
-      - "{{ version }}.yml"
+      - "config/{{ version }}.yml"
 
   roles:
       - role: basic
