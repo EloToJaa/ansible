@@ -24,13 +24,23 @@
   become: true
 
 - name: Update apt and install software
-  block:
-    - name: apt software
-      package:
-        update_cache: yes
-        name: "{{ apt_software }}"
-        state: present
-      become: true
+  package:
+    update_cache: yes
+    name: "{{ apt_software }}"
+    state: present
+  become: true
+
+- name: Install pip software
+  pip:
+    name: "{{ pip_software }}"
+    state: latest
+  become: true
+
+- name: Install pipx software
+  community.general.pipx:
+    name: "{{ pipx_software }}"
+    state: latest
+  become: true
 
 - name: Generate the locale
   locale_gen:
