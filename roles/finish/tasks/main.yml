@@ -39,8 +39,3 @@
     mode: 0755
   with_items: "{{ dirs }}"
   become: true
-
-- name: Remove playbook
-  file:
-    path: "{{ playbook_dir }}"
-    state: absent
