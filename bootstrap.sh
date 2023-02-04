@@ -41,9 +41,14 @@ echo "Installing pipx"
 pip install --user pipx
 python3 -m pipx ensurepath
 
-# install ansible
-echo "Installing ansible"
-pipx install ansible
+# check if ansible is installed
+if [ ! -x "$(command -v ansible)" ]; then
+    echo "Ansible is not installed"
+    echo "Installing ansible"
+    pipx install ansible
+else
+    echo "Ansible is installed"
+fi
 
 # clone github repo
 echo "Cloning github repo"
