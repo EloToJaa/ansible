@@ -4,9 +4,9 @@
   when: software|select("equalto", "ngrok")
 
 - name: Install go
+  become: true
   include_role:
     name: fubarhouse.golang
-  become: true
   when: software|select("equalto", "go")
 
 - name: Install rust
