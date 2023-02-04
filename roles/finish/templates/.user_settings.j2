@@ -1,6 +1,5 @@
 export PATH=$PATH:/home/elotoja/.local/bin
 export PATH=$PATH:/bin/snap
-
 {% if software|select("equalto", "rust") %}
 export PATH=$HOME/.cargo/bin:$PATH
 {% endif %}
@@ -24,10 +23,9 @@ alias mount='sudo mount | column -t'
 alias webup='sudo python -m http.server 80'
 alias ftpup='sudo python -m pyftpdlib -p 21'
 alias smbup='sudo python3 /usr/share/doc/python3-impacket/examples/smbserver.py -smb2support share $(pwd)'
+alias pipz_upgrade='pip freeze > requirements.txt; pip install -r requirements.txt --upgrade; rm requirements.txt;'
+{% if version == "kali" %}
 alias vpn-htb='sudo openvpn --config $HOME/HTB.ovpn'
-alias vpn-academy='sudo openvpn --config $HOME/HTB-Academy.ovpn'
-alias vpn-release_arena='sudo openvpn --config $HOME/HTB-Release-Arena.ovpn'
-alias vpn-starting_point='sudo openvpn --config $HOME/HTB-Starting-Point.ovpn'
 alias vpn-thm='sudo openvpn --config $HOME/THM.ovpn'
 alias ss='searchsploit $1'
 alias ssx='searchsploit -x $1'
@@ -46,7 +44,7 @@ alias aslr_off='echo 0 | sudo tee /proc/sys/kernel/randomize_va_space'
 alias gcc_no_protections='gcc -fno-stack-protector -z execstack -no-pie'
 alias docker_fix='sudo mkdir /sys/fs/cgroup/systemd; sudo mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd'
 alias rustscan='docker run -it --rm --name rustscan rustscan/rustscan:latest'
-alias pipz_upgrade='pip freeze > requirements.txt; pip install -r requirements.txt --upgrade; rm requirements.txt;'
+{% endif %}
 urlencode() {
     python3 -c "from pwn import *; print(urlencode('$1'));"
 }
