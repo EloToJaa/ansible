@@ -23,9 +23,6 @@ apt_software:
   - make
   - node
   - npm
-    
-pip_software:
-  - black
 
 pipx_software:
   - pwntools

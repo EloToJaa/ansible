@@ -30,6 +30,10 @@ software:
   - watchtower
   - cadvisor
   - nodeexporter
+  - speedtest
+  - mongo
+  - mongo-express
+  - sablier
   - prometheus
   - grafana
 
@@ -45,3 +49,6 @@ apt_software:
   - nano
   - vim
   - qemu-guest-agent
+
+pipx_software:
+  - PlexTraktSync

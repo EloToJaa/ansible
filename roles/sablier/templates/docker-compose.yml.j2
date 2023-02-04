@@ -1,0 +1,19 @@
+version: '3'
+services:
+  sablier:
+    container_name: sablier
+    image: ghcr.io/acouvreur/sablier
+    command:
+      - start
+      - --provider.name=docker
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - proxy
+    restart: unless-stopped
+    labels:
+      traefik.enable: true
+
+networks:
+  proxy:
+    external: true

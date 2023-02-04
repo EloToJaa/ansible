@@ -9,14 +9,8 @@ services:
       - TZ={{ timezone }}
     volumes:
       - heimdall-config:/config
-    restart: unless-stopped
     networks:
       - proxy
-    labels:
-      traefik.enable: true
-      traefik.http.routers.heimdall.entryPoints: https
-      traefik.http.routers.heimdall.rule: Host(`{{ var.DOMAIN }}`, `local.{{ var.DOMAIN }}`)
-      traefik.http.routers.heimdall.middlewares: auth@file
 
 networks:
   proxy:

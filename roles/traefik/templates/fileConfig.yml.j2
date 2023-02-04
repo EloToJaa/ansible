@@ -2,20 +2,104 @@ http:
 
   routers:
     pve:
+      rule: Host(`pve.elotoja.com`, `pve.local.elotoja.com`)
       entryPoints:
         - https
-      rule: Host(`pve.{{ var.DOMAIN }}`, `pve.local.{{ var.DOMAIN }}`)
       service: pve
       middlewares:
         - auth
         - pve-headers
-  
+    guacamole:
+      rule: Host(`remote.elotoja.com`, `remote.local.elotoja.com`)
+      entryPoints:
+        - https
+      middlewares:
+        - auth@file
+        - tp-guacamole@file
+        - start-guacamole@file
+      service: guacamole
+    adminer:
+      rule: Host(`adminer.elotoja.com`, `adminer.local.elotoja.com`)
+      entryPoints:
+        - https
+      middlewares:
+        - auth@file
+        - start-adminer@file
+      service: adminer
+    grafana:
+      rule: Host(`grafana.elotoja.com`, `grafana.local.elotoja.com`)
+      entryPoints:
+        - https
+      middlewares:
+        - auth@file
+        - start-grafana@file
+      service: grafana
+    heimdall:
+      rule: Host(`elotoja.com`, `local.elotoja.com`)
+      entryPoints:
+        - https
+      middlewares:
+        - auth@file
+        - start-heimdall@file
+      service: heimdall
+    redis-commander:
+      rule: Host(`redis.elotoja.com`, `redis.local.elotoja.com`)
+      entryPoints:
+        - https
+      middlewares:
+        - auth@file
+        - start-redis-commander@file
+      service: redis-commander
+    mongo-express:
+      rule: Host(`mongo.elotoja.com`, `mongo.local.elotoja.com`)
+      entryPoints:
+        - https
+      middlewares:
+        - auth@file
+        - start-mongo-express@file
+      service: mongo-express
+    wireguard:
+      rule: Host(`wg.elotoja.com`, `wg.local.elotoja.com`)
+      entryPoints:
+        - https
+      middlewares:
+        - auth@file
+      service: wireguard
+
   services:
     pve:
       loadBalancer:
         servers:
           - url: https://192.168.0.30:8006/
         passHostHeader: true
+    guacamole:
+      loadBalancer:
+        servers:
+          - url: "http://remote:8080"
+    adminer:
+      loadBalancer:
+        servers:
+          - url: "http://adminer:8080"
+    grafana:
+      loadBalancer:
+        servers:
+          - url: "http://grafana:3000"
+    heimdall:
+      loadBalancer:
+        servers:
+          - url: "http://heimdall:80"
+    redis-commander:
+      loadBalancer:
+        servers:
+          - url: "http://redis-commander:8081"
+    mongo-express:
+      loadBalancer:
+        servers:
+          - url: "http://mongo-express:8081"
+    wireguard:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.0.20:51821"
   
   ## MIDDLEWARES ##
   middlewares:
@@ -86,17 +170,89 @@ http:
         customRequestHeaders:
           X-Forwarded-Proto: https
     
-    # tp-portainer:
-    #   plugin:
-    #     traefik-themepark:
-    #       app: portainer
-    #       theme: organizr
+    start-guacamole:
+      plugin:
+        sablier:
+          dynamic:
+            displayName: "guacamole"
+            refreshFrequency: 5s
+            showDetails: "true"
+            theme: shuffle
+          names: guacamole
+          sablierUrl: http://sablier:10000
+          sessionDuration: 1h
     
-    # tp-guacamole:
-    #   plugin:
-    #     traefik-themepark:
-    #       app: guacamole
-    #       theme: organizr
+    start-adminer:
+      plugin:
+        sablier:
+          dynamic:
+            displayName: "adminer"
+            refreshFrequency: 5s
+            showDetails: "true"
+            theme: shuffle
+          names: adminer
+          sablierUrl: http://sablier:10000
+          sessionDuration: 1h
+    
+    start-grafana:
+      plugin:
+        sablier:
+          dynamic:
+            displayName: "grafana"
+            refreshFrequency: 5s
+            showDetails: "true"
+            theme: shuffle
+          names: grafana
+          sablierUrl: http://sablier:10000
+          sessionDuration: 1h
+    
+    start-heimdall:
+      plugin:
+        sablier:
+          dynamic:
+            displayName: "heimdall"
+            refreshFrequency: 5s
+            showDetails: "true"
+            theme: shuffle
+          names: heimdall
+          sablierUrl: http://sablier:10000
+          sessionDuration: 1h
+    
+    start-redis-commander:
+      plugin:
+        sablier:
+          dynamic:
+            displayName: "redis commander"
+            refreshFrequency: 5s
+            showDetails: "true"
+            theme: shuffle
+          names: redis-commander
+          sablierUrl: http://sablier:10000
+          sessionDuration: 1h
+    
+    start-mongo-express:
+      plugin:
+        sablier:
+          dynamic:
+            displayName: "mongo express"
+            refreshFrequency: 5s
+            showDetails: "true"
+            theme: shuffle
+          names: mongo-express
+          sablierUrl: http://sablier:10000
+          sessionDuration: 1h
+    
+    tp-guacamole:
+      plugin:
+        traefik-themepark:
+          app: guacamole
+          theme: organizr
+    
+    tp-requestrr:
+      plugin:
+        traefik-themepark:
+          app: requestrr
+          theme: organizr
 
 # Only use secure ciphers - https://ssl-config.mozilla.org/#server=traefik&version=2.6.0&config=intermediate&guideline=5.6
 tls:

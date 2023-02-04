@@ -1,0 +1,12 @@
+version: '3'
+services:
+  speedtest:
+    image: miguelndecarvalho/speedtest-exporter
+    container_name: speedtest
+    restart: unless-stopped
+    networks:
+      - monitoring
+
+networks:
+  monitoring:
+    external: true

@@ -5,13 +5,8 @@ services:
     container_name: guacamole
     volumes:
       - guacamole-config:/config
-    restart: unless-stopped
     networks:
       - proxy
-    labels:
-      traefik.enable: true
-      traefik.http.routers.guacamole.entryPoints: https
-      traefik.http.routers.guacamole.middlewares: auth@file
 
 networks:
   proxy:

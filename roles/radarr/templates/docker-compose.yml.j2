@@ -10,7 +10,6 @@ services:
       - DOCKER_MODS=ghcr.io/gilbn/theme.park:radarr
     volumes:
       - radarr-data:/config
-      - {{ data_dir }}/Backups/radarr:/config/Backups
       - {{ data_dir }}/Torrents:/torrents
     restart: unless-stopped
     networks:

@@ -1,0 +1,14 @@
+version: '3.1'
+
+services:
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo-express
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb://root:{{ var.MONGO_ROOT_PASSWORD }}@mongo:27017/
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
