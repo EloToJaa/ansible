@@ -1,6 +1,6 @@
-# kali-ansible
+# debian-ansible
 
-A simple interactive script/Ansible playbook that sets up Kali Linux
+A simple interactive script/Ansible playbook that sets up Debian-based machines with a few useful tools and security features.
 
 ## Usage
 
@@ -14,26 +14,6 @@ wget https://raw.githubusercontent.com/EloToJaa/ansible/master/bootstrap.sh -O b
 * SSH public key pair generation (optional, you can also use your own keys)
 
 ## FAQ
-### Q: I've run the playbook succesfully, but now I want to change the domain name/username/password. How can I do that?
-
-Edit the variable files, install dependencies for the new user and re-run the playbook:
-
-```
-cd $HOME/kali-ansible
-ansible-galaxy install -r requirements.yml
-nano custom.yml
-ansible-vault edit secret.yml
-ansible-playbook run.yml
-```
-
-### Q: I'd like to completely automate the process of setting up the VPN on my machines. How can I do that?
-1. Fork this repository
-2. Fill out the `custom.yml` and `secret.yml` files, either by running the `bootstrap.sh` script, or editing the files manually
-3. Remove `secret.yml` from .gitignore
-4. Commit and push the changes
-
-Consider making your repository private. Even though the Vault file is encrypted, it might be unsafe to make it publicly accessible.
-
 ### Q: I can't copy the SSH key to my Windows machine
 
 On Windows, you might need to create the `C:\Users\<username>\.ssh` folder manually before running the commands at the end of the playbook:
