@@ -24,7 +24,7 @@
 - name: Link starship to .zshrc
   lineinfile:
     path: "{{ home }}/.zshrc"
-    line: 'eval \"$(starship init zsh)"'
+    line: 'eval "$(starship init zsh)"'
     insertafter: EOF
 
 - name: Create user settings
