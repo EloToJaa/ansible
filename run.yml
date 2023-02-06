@@ -9,6 +9,8 @@
       - "config/{{ version }}.yml"
 
   roles:
+      - role: options
+
       - role: basic
 
       - role: desktop

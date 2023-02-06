@@ -13,3 +13,6 @@ run_containers: true
 shares:
   - uri: "//IP/Share"
     mountpoint: "/mnt/Share"
+
+additional_software:
+  - 'ssh'

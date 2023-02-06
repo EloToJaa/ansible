@@ -1,0 +1,4 @@
+- name: Merge software and additional_software
+  set_fact:
+    software: "{{ software + additional_software }}"
+  when: additional_software is defined

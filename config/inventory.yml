@@ -58,6 +58,7 @@ all:
     
     pip_software: []
     pipx_software: []
+    additional_software: []
     
     go_version: 1.19.1
     go_install_clean: true

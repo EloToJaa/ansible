@@ -5,7 +5,3 @@ apt_software:
   - gcc
   - g++
   - make
-    
-pip_software:
-  - pwntools
-  - pwncat-cs
