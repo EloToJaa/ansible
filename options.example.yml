@@ -1,0 +1,32 @@
+# General options
+enable_ssh_keygen: false
+enable_username_creation: false
+notifications: false
+timezone: Europe/Warsaw
+
+# Server Docker section
+docker_dir: /mnt/Server/Docker
+data_dir: /mnt/Data
+run_containers: true
+
+# Samba shares
+shares:
+  - uri: "//IP/Share"
+    mountpoint: "/mnt/Share"
+
+# Static IP
+set_static: true
+networking:
+  - ifname: eth0
+    ip4: IP/24
+    gw4: IP
+    dns4:
+      - DNS1s
+      - DNS2
+      - DNS3
+
+# Optional variables if you need to change installed release of go / python / nodejs
+# go_version: 1.19.1
+# pyenv_python_versions: []
+# node_version: 16.17.1
+# node_versions: []
