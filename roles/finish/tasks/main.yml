@@ -82,7 +82,7 @@
 
 - name: Install Fira Code Nerdfont
   shell: >
-    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/FiraCode.zip -O FiraCode.zip && unzip FiraCode.zip -d FiraCode && mv FiraCode/*.ttf /usr/share/fonts/TTF/ && rm -rf FiraCode FiraCode.zip
+    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/FiraCode.zip -O FiraCode.zip && unzip FiraCode.zip -d FiraCode && mv FiraCode/*.ttf /usr/share/fonts/ && rm -rf FiraCode FiraCode.zip
 
 
 # - name: Change ownership of directories
