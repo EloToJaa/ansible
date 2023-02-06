@@ -3,7 +3,7 @@ software:
   - ssh
   - vnc
   - samba
-  - brave
+  # - brave
   - vscode
   - sublime
   - ngrok
