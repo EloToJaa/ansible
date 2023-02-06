@@ -21,7 +21,7 @@ apt_software:
   - gcc
   - g++
   - make
-  - node
+  - nodejs
   - npm
 
 pipx_software:
