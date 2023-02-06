@@ -9,6 +9,26 @@ set -e
 
 echo "This script will configure a linux machine"
 
+# update packages
+echo "Updating system"
+sudo apt update
+sudo apt upgrade -y
+sudo apt install -y git python3-pip python3-venv
+
+# install pipx using pip
+echo "Installing pipx"
+pip install --user pipx
+python3 -m pipx ensurepath
+
+# check if ansible is installed
+if [ ! -x "$(command -v ansible)" ]; then
+    echo "Ansible is not installed"
+    echo "Installing ansible"
+    pipx install ansible
+else
+    echo "Ansible is installed"
+fi
+
 # check if ansible dir exists if it does delete it
 if [ -d "ansible" ]; then
     echo "Ansible dir exists"
@@ -52,25 +72,6 @@ if [ ! -f "options.yml" ]; then
     echo "options.yml file not found"
     cp ansible/options.example.yml options.yml
     exit 1
-fi
-
-echo "Updating system"
-sudo apt update
-sudo apt upgrade -y
-sudo apt install -y git python3-pip python3-venv
-
-# install pipx using pip
-echo "Installing pipx"
-pip install --user pipx
-python3 -m pipx ensurepath
-
-# check if ansible is installed
-if [ ! -x "$(command -v ansible)" ]; then
-    echo "Ansible is not installed"
-    echo "Installing ansible"
-    pipx install ansible
-else
-    echo "Ansible is installed"
 fi
 
 # move files
