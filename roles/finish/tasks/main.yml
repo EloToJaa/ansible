@@ -81,9 +81,28 @@
   become: true
 
 - name: Install Fira Code Nerdfont
-  shell: >
-    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/FiraCode.zip -O FiraCode.zip && unzip FiraCode.zip -d FiraCode && mv FiraCode/*.ttf /usr/share/fonts/ && rm -rf FiraCode FiraCode.zip
-  become: true
+  block:
+    - name: Download Fira Code Nerdfont
+      get_url:
+        url: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/FiraCode.zip
+        dest: "{{ home }}/FiraCode.zip"
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        mode: 0644
+    - name: Unzip Fira Code Nerdfont
+      unarchive:
+        src: "{{ home }}/FiraCode.zip"
+        dest: "/usr/share/fonts/"
+      become: true
+    - name: Remove Fira Code Nerdfont zip file
+      file:
+        path: "{{ home }}/FiraCode.zip"
+        state: absent
+
+# - name: Install Fira Code Nerdfont
+#   shell: >
+#     wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/FiraCode.zip -O FiraCode.zip && unzip FiraCode.zip -d FiraCode && mv FiraCode/*.ttf /usr/share/fonts/ && rm -rf FiraCode FiraCode.zip
+#   become: true
 
 
 # - name: Change ownership of directories
