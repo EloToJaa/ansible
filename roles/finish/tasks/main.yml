@@ -37,6 +37,14 @@
   with_items:
     - .user_settings
 
+- name: "Create directory for starship files"
+  file:
+    path: "{{ home }}/.config"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+  become: true
+
 - name: Create starship settings
   template:
     src: "{{ item }}.j2"
@@ -46,6 +54,15 @@
     mode: 0755
   with_items:
     - starship.toml
+
+- name: "Create directory for starship files"
+  file:
+    path: "{{ home }}/.vscode-server/data/Machine"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    recurse: yes
+  become: true
 
 - name: Create machine settings
   template:
