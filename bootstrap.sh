@@ -21,9 +21,20 @@ echo "Cloning github repo"
 git clone https://github.com/elotojaa/ansible
 
 echo "Checking if secret.yml and options.yml files exist"
+
+# Check if secret.yml and options.yml files exist
+if [ ! -f "secret.yml" ] && [ ! -f "options.yml" ]; then
+    echo "secret.yml and options.yml files not found"
+    echo "Copying example files"
+    cp ansible/secret.example.yml secret.yml
+    cp ansible/options.example.yml options.yml
+    exit 1
+fi
+
 # Check if secret.yml file exists
 if [ ! -f "secret.yml" ]; then
     echo "secret.yml file not found"
+    cp ansible/secret.example.yml secret.yml
     exit 1
 fi
 
@@ -39,6 +50,7 @@ fi
 # Check if options.yml file exists
 if [ ! -f "options.yml" ]; then
     echo "options.yml file not found"
+    cp ansible/options.example.yml options.yml
     exit 1
 fi
 
