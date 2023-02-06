@@ -78,17 +78,11 @@ all:
 
     zsh_debug_startup_time: false
 
-    zsh_ohmy_theme: spaceship
-
     zsh_ohmy_custom_plugins:
       - name: zsh-syntax-highlighting
         repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git"
       - name: zsh-autosuggestions
         repo: "https://github.com/zsh-users/zsh-autosuggestions.git"
-    
-    zsh_ohmy_custom_themes:
-      - name: spaceship
-        repo: "https://github.com/spaceship-prompt/spaceship-prompt.git"
 
     zsh_ohmy_plugins:
       - zsh-syntax-highlighting
