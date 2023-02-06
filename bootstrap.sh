@@ -9,6 +9,17 @@ set -e
 
 echo "This script will configure a linux machine"
 
+# check if ansible dir exists if it does delete it
+if [ -d "ansible" ]; then
+    echo "Ansible dir exists"
+    echo "Deleting ansible dir"
+    rm -rf ansible
+fi
+
+# clone github repo
+echo "Cloning github repo"
+git clone https://github.com/elotojaa/ansible
+
 echo "Checking if secret.yml and options.yml files exist"
 # Check if secret.yml file exists
 if [ ! -f "secret.yml" ]; then
@@ -49,17 +60,6 @@ if [ ! -x "$(command -v ansible)" ]; then
 else
     echo "Ansible is installed"
 fi
-
-# check if ansible dir exists if it does delete it
-if [ -d "ansible" ]; then
-    echo "Ansible dir exists"
-    echo "Deleting ansible dir"
-    rm -rf ansible
-fi
-
-# clone github repo
-echo "Cloning github repo"
-git clone https://github.com/elotojaa/ansible
 
 # move files
 echo "Moving files"
