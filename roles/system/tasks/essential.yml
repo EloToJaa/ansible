@@ -47,7 +47,7 @@
     state: present
   become: true
 
-- name: Update SSH configuration to be more secure
+- name: Update SSH configuration to change dns
   register: ssh_config
   lineinfile:
     dest: "/etc/systemd/resolved.conf"
@@ -62,6 +62,7 @@
       line: "FallbackDNS=1.1.1.1"
     - regexp: "^#?DNSStubListener="
       line: "DNSStubListener=no"
+  when: version == "server"
   become: true
 
 # - name: Create a symlink
