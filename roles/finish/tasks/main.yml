@@ -26,7 +26,7 @@
         mode: 0755
     - name: Install starship
       shell: >
-        sh install.sh -y
+        sh "{{ home }}/install.sh" -y
       become: true
     - name: Remove starship install script
       file:
