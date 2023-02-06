@@ -75,6 +75,21 @@
 - name: Populate service facts
   service_facts:
 
+- name: Stop ssh
+  service:
+    name: ssh
+    state: stopped
+  when: "'ssh.service' in ansible_facts.services"
+  become: true
+
+- name: Start and enable ssh
+  service:
+    name: ssh
+    state: started
+    enabled: yes
+  when: "'ssh.service' in ansible_facts.services"
+  become: true
+
 - name: Stop systemd-resolved
   service:
     name: systemd-resolved
