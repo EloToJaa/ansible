@@ -10,10 +10,28 @@
     line: "source $HOME/.user_settings"
     insertafter: EOF
 
+# - name: Install starship
+#   ansible.builtin.shell: >
+#     wget https://starship.rs/install.sh -O install.sh && sh install.sh -y && rm install.sh
+#   become: true
+
 - name: Install starship
-  ansible.builtin.shell: >
-    wget https://starship.rs/install.sh -O install.sh && sh install.sh -y && rm install.sh
-  become: true
+  block:
+    - name: Download starship
+      get_url:
+        url: https://starship.rs/install.sh
+        dest: "{{ home }}/install.sh"
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        mode: 0755
+    - name: Install starship
+      shell: >
+        sh install.sh -y
+      become: true
+    - name: Remove starship install script
+      file:
+        path: "{{ home }}/install.sh"
+        state: absent
 
 - name: Unlink starship from .zshrc
   lineinfile:
