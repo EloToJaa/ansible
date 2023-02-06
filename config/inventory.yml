@@ -83,6 +83,8 @@ all:
         repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git"
       - name: zsh-autosuggestions
         repo: "https://github.com/zsh-users/zsh-autosuggestions.git"
+    
+    zsh_ohmy_theme: mira
 
     zsh_ohmy_plugins:
       - zsh-syntax-highlighting
