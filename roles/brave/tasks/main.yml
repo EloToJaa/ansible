@@ -17,7 +17,7 @@
 
     - name: Add brave Repository
       apt_repository:
-        repo: "deb [arch=amd64] {{ https_repository_prefix }}brave-browser-apt-release.s3.brave.com/ stable main"
+        repo: "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"
         state: present
       become: true
 
