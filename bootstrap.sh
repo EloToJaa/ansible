@@ -17,14 +17,14 @@ sudo apt install -y git python3-pip python3-venv
 
 # install pipx using pip
 echo "Installing pipx"
-pip install --user pipx
+python3 -m pip install --user pipx
 python3 -m pipx ensurepath
 
 # check if ansible is installed
 if [ ! -x "$(command -v ansible)" ]; then
     echo "Ansible is not installed"
     echo "Installing ansible"
-    pipx install ansible
+    python3 -m pipx install ansible
 else
     echo "Ansible is installed"
 fi
