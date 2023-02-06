@@ -13,21 +13,12 @@ echo "This script will configure a linux machine"
 echo "Updating system"
 sudo apt update
 sudo apt upgrade -y
-sudo apt install -y git python3-pip python3-venv
+sudo apt install -y git python3-pip python3-venv ansible
 
 # install pipx using pip
 echo "Installing pipx"
 python3 -m pip install --user pipx
 python3 -m pipx ensurepath
-
-# check if ansible is installed
-if [ ! -x "$(command -v ansible)" ]; then
-    echo "Ansible is not installed"
-    echo "Installing ansible"
-    python3 -m pipx install ansible
-else
-    echo "Ansible is installed"
-fi
 
 # check if ansible dir exists if it does delete it
 if [ -d "ansible" ]; then
