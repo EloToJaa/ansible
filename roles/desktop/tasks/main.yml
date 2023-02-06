@@ -6,6 +6,7 @@
 - name: Install brave
   include_role:
     name: professormanhattan.bravebrowser
+  become: true
   when: software|select("equalto", "brave")
 
 - name: Install vscode
