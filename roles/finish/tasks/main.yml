@@ -1,24 +1,33 @@
-- name: Remove file link from .zshrc
+- name: Unlink user settings from .zshrc
   lineinfile:
     path: "{{ home }}/.zshrc"
     regexp: "^source .HOME\/.user_settings$"
     state: absent
     
-- name: Add file link from .zshrc
+- name: Link user settings to .zshrc
   lineinfile:
     path: "{{ home }}/.zshrc"
     line: "source $HOME/.user_settings"
     insertafter: EOF
 
-- name: Create a link to spaceship theme
-  file:
-    src: "{{ home }}/.oh-my-zsh/custom/themes/spaceship/spaceship.zsh-theme"
-    dest: "{{ home }}/.oh-my-zsh/custom/spaceship.zsh-theme"
-    owner: "{{ username }}"
-    group: "{{ username }}"
-    state: link
+- name: Install starship
+  ansible.builtin.shell: >
+    wget https://starship.rs/install.sh -O install.sh && sh install.sh -y && rm install.sh
+  become: true
 
-- name: Create .user_settings file
+- name: Unlink starship from .zshrc
+  lineinfile:
+    path: "{{ home }}/.zshrc"
+    regexp: 'eval "$(starship init zsh)"'
+    state: absent
+    
+- name: Link starship to .zshrc
+  lineinfile:
+    path: "{{ home }}/.zshrc"
+    line: 'eval \"$(starship init zsh)"'
+    insertafter: EOF
+
+- name: Create user settings
   template:
     src: "{{ item }}.j2"
     dest: "{{ home }}/{{ item }}"
@@ -27,15 +36,34 @@
     mode: 0755
   with_items:
     - .user_settings
-    - .spaceshiprc.zsh
 
-- name: Change ownership of directories
-  file:
-    state: directory
-    recurse: yes
-    path: "/{{ home }}/{{ item }}"
+- name: Create starship settings
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ home }}/.config/{{ item }}"
     owner: "{{ username }}"
     group: "{{ username }}"
     mode: 0755
-  with_items: "{{ dirs }}"
-  become: true
+  with_items:
+    - starship.toml
+
+- name: Create machine settings
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ home }}/.vscode-server/data/Machine/{{ item }}"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0664
+  with_items:
+    - settings.json
+
+# - name: Change ownership of directories
+#   file:
+#     state: directory
+#     recurse: yes
+#     path: "/{{ home }}/{{ item }}"
+#     owner: "{{ username }}"
+#     group: "{{ username }}"
+#     mode: 0755
+#   with_items: "{{ dirs }}"
+#   become: true
