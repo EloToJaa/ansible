@@ -9,7 +9,7 @@ software:
   - ngrok
   - go
   - rust
-  - ruby
+  # - ruby
   - ghidra
   - gdb
   - qemu
