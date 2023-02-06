@@ -3,11 +3,12 @@
     name: vnc
   when: software|select("equalto", "vnc")
 
-- name: Install brave
-  include_role:
-    name: professormanhattan.bravebrowser
+- block:
+    - name: Install brave
+      include_role:
+        name: professormanhattan.bravebrowser
+      when: software|select("equalto", "brave")
   become: true
-  when: software|select("equalto", "brave")
 
 - name: Install vscode
   include_role:
