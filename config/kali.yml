@@ -3,13 +3,12 @@ software:
   - ssh
   - vnc
   - samba
-  # - brave
+  - brave
   - vscode
   - sublime
   - ngrok
   - go
   - rust
-  # - ruby
   - ghidra
   - gdb
   - qemu
@@ -23,6 +22,7 @@ apt_software:
   - make
   - nodejs
   - npm
+  - ruby
 
 pipx_software:
   - pwntools

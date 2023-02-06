@@ -15,11 +15,6 @@
     name: rust
   when: software|select("equalto", "rust")
 
-- name: Install ruby
-  include_role:
-    name: professormanhattan.ruby
-  when: software|select("equalto", "ruby")
-
 - name: Install ghidra
   include_role:
     name: ghidra

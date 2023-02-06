@@ -1,0 +1,31 @@
+- name: Include variables
+  include_vars: "debian.yml"
+
+- name: Install required system packages
+  package:
+    state: present
+    name: "{{ brave_deps }}"
+  become: true
+
+- name: Install brave
+  block:
+    - name: Add brave GPG apt Key
+      apt_key:
+        url: https://brave-browser-apt-release.s3.brave.com/brave-core.asc
+        state: present
+      become: true
+
+    - name: Add brave Repository
+      apt_repository:
+        repo: "deb [arch=amd64] {{ https_repository_prefix }}brave-browser-apt-release.s3.brave.com/ stable main"
+        state: present
+      become: true
+
+- name: Update apt and install brave
+  block:
+    - name: Attempt installation
+      apt:
+        update_cache: yes
+        name: "{{ brave_packages }}"
+        state: present
+      become: true
