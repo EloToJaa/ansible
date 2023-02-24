@@ -2,6 +2,9 @@
 
 A simple interactive script/Ansible playbook that sets up Debian-based machines with a few useful tools and security features.
 
+## Fork
+This playbook is a fork of [notthebee/ansible-easy-vpn](https://github.com/notthebee/ansible-easy-vpn)
+
 ## Usage
 
 ```
