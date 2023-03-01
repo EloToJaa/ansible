@@ -49,6 +49,3 @@ apt_software:
   - nano
   - vim
   - qemu-guest-agent
-
-pipx_software:
-  - PlexTraktSync
