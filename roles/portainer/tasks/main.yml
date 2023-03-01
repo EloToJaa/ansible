@@ -36,6 +36,12 @@
     - config.json
   become: true
 
+- name: Link .env file
+  file:
+    state: hard
+    src: "{{ docker_dir }}/.env"
+    dest: "{{ docker_dir }}/{{ role_name }}/.env"
+
 - name: "Run {{ role_name }}"
   community.docker.docker_compose:
     project_src: "{{ docker_dir }}/{{ role_name }}"
