@@ -1,0 +1,13 @@
+
+[Interface]
+PrivateKey = {{ var.PRIVATE_KEY }}
+Address = {{ var.ADDRESS }}
+DNS = 1.1.1.1,1.0.0.1
+
+
+[Peer]
+PublicKey = {{ var.PUBLIC_KEY }}
+PresharedKey = {{ var.PRESHARED_KEY }}
+AllowedIPs = 0.0.0.0/0
+PersistentKeepalive = 25
+Endpoint = {{ var.ENDPOINT }}

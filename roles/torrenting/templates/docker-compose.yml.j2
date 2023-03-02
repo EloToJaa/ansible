@@ -16,6 +16,7 @@ services:
       - PRIVOXY_ENABLED=false
     volumes:
       - qbittorrent-config:/config
+      - {{ data_dir }}/torrenting/wg0.conf:/config/wireguard/wg0.conf
       - {{ data_dir }}/Torrents:/torrents
     cap_add:
       - NET_ADMIN

@@ -15,6 +15,7 @@
     mode: 0600
   with_items:
     - docker-compose.yml
+    - wg0.conf
   become: true
 
 - name: Delete .env file
