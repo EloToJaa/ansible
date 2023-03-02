@@ -18,11 +18,17 @@
     - prometheus.yml
   become: true
 
+- name: Delete .env file
+  file:
+    path: "{{ docker_dir }}/{{ role_name }}/.env"
+    state: absent
+
 - name: Link .env file
   file:
     state: hard
     src: "{{ docker_dir }}/.env"
     dest: "{{ docker_dir }}/{{ role_name }}/.env"
+    mode: 0600
   become: true
 
 - name: "Run {{ role_name }}"
