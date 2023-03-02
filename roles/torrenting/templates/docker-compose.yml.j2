@@ -7,7 +7,7 @@ services:
       - PUID=${USER_UID}
       - PGID=${USER_GID}
       - UMASK=002
-      - TZ={{ timezone }}
+      - TZ=${TZ}
       - VPN_ENABLED=true
       - VPN_LAN_NETWORK=${LOCAL_NETWORK}
       - VPN_CONF=wg0
@@ -16,8 +16,8 @@ services:
       - PRIVOXY_ENABLED=false
     volumes:
       - qbittorrent:/config
-      - {{ data_dir }}/torrenting/wg0.conf:/config/wireguard/wg0.conf
-      - {{ data_dir }}/Torrents:/torrents
+      - ${DOCKER_DIR}/torrenting/wg0.conf:/config/wireguard/wg0.conf
+      - ${DATA_DIR}/Torrents:/torrents
     cap_add:
       - NET_ADMIN
     sysctls:
@@ -45,7 +45,7 @@ services:
     environment:
       - PUID=${USER_UID}
       - PGID=${USER_GID}
-      - TZ={{ timezone }}
+      - TZ=${TZ}
       - DOCKER_MODS=ghcr.io/gilbn/theme.park:jackett
     volumes:
       - jackett:/config

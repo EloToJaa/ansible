@@ -6,11 +6,11 @@ services:
     environment:
       - PUID=${USER_UID}
       - PGID=${USER_GID}
-      - TZ={{ timezone }}
+      - TZ=${TZ}
       - DOCKER_MODS=ghcr.io/gilbn/theme.park:sonarr
     volumes:
       - sonarr:/config
-      - {{ data_dir }}/Torrents:/torrents
+      - ${DATA_DIR}/Torrents:/torrents
     restart: unless-stopped
     networks:
       - proxy

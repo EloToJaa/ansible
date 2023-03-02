@@ -4,7 +4,7 @@ services:
     image: containrrr/watchtower:latest
     container_name: watchtower
     environment:
-      - TZ={{ timezone }}
+      - TZ=${TZ}
       - WATCHTOWER_CLEANUP=true
       - WATCHTOWER_REMOVE_VOLUMES=true
       - WATCHTOWER_DEBUG=true
@@ -12,5 +12,5 @@ services:
       - WATCHTOWER_POLL_INTERVAL=86400
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - {{ home }}/.docker/config.json:/config.json
+      - ${HOME_DIR}/.docker/config.json:/config.json
     restart: unless-stopped

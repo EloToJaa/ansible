@@ -6,7 +6,7 @@ services:
     environment:
       - PUID=${USER_UID}
       - PGID=${USER_GID}
-      - TZ={{ timezone }}
+      - TZ=${TZ}
     volumes:
       - ombi:/config
     restart: unless-stopped

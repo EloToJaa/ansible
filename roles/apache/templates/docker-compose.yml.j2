@@ -4,7 +4,7 @@ services:
     image: httpd
     container_name: apache
     volumes:
-      - {{ docker_dir }}/Website/:/usr/local/apache2/htdocs/
+      - ${DOCKER_DIR}/Website/:/usr/local/apache2/htdocs/
     restart: unless-stopped
     networks:
       - proxy

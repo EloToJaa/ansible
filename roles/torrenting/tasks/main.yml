@@ -32,10 +32,10 @@
   become: true
   
 - name: "Create qbittorrent volume"
-  shell: "docker volume create -d local-persist -o mountpoint=/opt/volumes/qbittorrent --name=qbittorrent"
+  shell: "docker volume create -d local-persist -o mountpoint={{ volumes_dir }}/qbittorrent --name=qbittorrent"
 
 - name: "Create jackett volume"
-  shell: "docker volume create -d local-persist -o mountpoint=/opt/volumes/jackett --name=jackett"
+  shell: "docker volume create -d local-persist -o mountpoint={{ volumes_dir }}/jackett --name=jackett"
 
 - name: "Run {{ role_name }}"
   community.docker.docker_compose:

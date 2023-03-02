@@ -4,7 +4,7 @@ services:
     image: prom/prometheus:latest
     container_name: prometheus
     volumes:
-      - {{ docker_dir }}/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ${DOCKER_DIR}/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - prometheus:/prometheus
     restart: unless-stopped
     command:
