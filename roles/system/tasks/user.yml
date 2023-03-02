@@ -52,7 +52,7 @@
 
 - name: Copy the Ansible playbook to the new user
   copy:
-    src: "/{{ home }}/{{ repo_name }}"
+    src: "{{ home }}/{{ repo_name }}"
     dest: "{{ home }}"
     owner: "{{ username }}"
     decrypt: no
