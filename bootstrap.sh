@@ -13,7 +13,7 @@ echo "This script will configure a linux machine"
 echo "Updating system"
 sudo apt update
 sudo apt upgrade -y
-sudo apt install -y git python3-pip python3-venv ansible pipx
+sudo apt install -y git python3-pip python3-venv pipx
 
 # check if ansible dir exists if it does delete it
 if [ -d "ansible" ]; then
