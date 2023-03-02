@@ -6,9 +6,7 @@
 
 - name: Install cryptography
   pip:
-    name: cryptography
-    state: latest
-  become: true
+    name: cryptography==38.0.4
 
 - name: Create the SSH directory
   file:
