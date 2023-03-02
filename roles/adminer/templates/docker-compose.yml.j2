@@ -4,7 +4,7 @@ services:
     image: adminer
     container_name: adminer
     volumes:
-      - {{ docker_dir }}/adminer/adminer.css:/var/www/html/adminer.css
+      - ${EXT_DIR}/adminer/adminer.css:/var/www/html/adminer.css
     networks:
       - proxy
 
