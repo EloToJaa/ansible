@@ -11,6 +11,11 @@
   when: version == "server"
   become: true
 
+- name: Install sablier
+  include_role:
+    name: sablier
+  when: software|select("equalto", "sablier")
+
 - name: Install postgres
   include_role:
     name: postgres
@@ -145,6 +150,11 @@
   include_role:
     name: cadvisor
   when: software|select("equalto", "cadvisor")
+
+- name: Install speedtest
+  include_role:
+    name: speedtest
+  when: software|select("equalto", "speedtest")
 
 - name: Install prometheus
   include_role:

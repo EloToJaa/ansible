@@ -20,6 +20,8 @@ software:
   - redis
   - redis-commander
   - requestrr
+  - sablier
+  - speedtest
   - shlink
   - sonarr
   - tautulli
