@@ -10,9 +10,10 @@ services:
       - VERSION=docker
       - PLEX_CLAIM=${PLEX_CLAIM}
     volumes:
-      - plex-data:/config
+      - plex:/config
       - {{ data_dir }}/Torrents/:/data
     restart: unless-stopped
 
 volumes:
-  plex-data:
+  plex:
+    external: true

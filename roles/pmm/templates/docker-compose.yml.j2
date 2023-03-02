@@ -9,7 +9,7 @@ services:
       - TZ={{ timezone }}
       - PMM_TIME={{ pmm_time }}
     volumes:
-      - pmm-config:/config
+      - pmm:/config
       - {{ docker_dir }}/pmm/config.yml:/config/config.yml
       - {{ docker_dir }}/pmm/TV.yml:/config/TV.yml
       - {{ docker_dir }}/pmm/Movies.yml:/config/Movies.yml
@@ -22,4 +22,5 @@ networks:
     external: true
 
 volumes:
-  pmm-config:
+  pmm:
+    external: true

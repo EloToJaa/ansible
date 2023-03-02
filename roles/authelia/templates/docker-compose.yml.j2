@@ -4,7 +4,7 @@ services:
     image: authelia/authelia
     container_name: auth
     volumes:
-      - authelia-config:/config
+      - authelia:/config
       - {{ docker_dir }}/authelia/configuration.yml:/config/configuration.yml
       - {{ docker_dir }}/authelia/users_database.yml:/config/users_database.yml
     environment:
@@ -21,4 +21,5 @@ networks:
     external: true
 
 volumes:
-  authelia-config:
+  authelia:
+    external: true

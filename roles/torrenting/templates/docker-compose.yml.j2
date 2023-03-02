@@ -15,7 +15,7 @@ services:
       - VPN_ADDITIONAL_PORTS=9696/tcp,9117/tcp
       - PRIVOXY_ENABLED=false
     volumes:
-      - qbittorrent-config:/config
+      - qbittorrent:/config
       - {{ data_dir }}/torrenting/wg0.conf:/config/wireguard/wg0.conf
       - {{ data_dir }}/Torrents:/torrents
     cap_add:
@@ -48,7 +48,7 @@ services:
       - TZ={{ timezone }}
       - DOCKER_MODS=ghcr.io/gilbn/theme.park:jackett
     volumes:
-      - jackett-config:/config
+      - jackett:/config
     depends_on:
       - qbittorrent
     restart: always
@@ -58,5 +58,7 @@ networks:
     external: true
 
 volumes:
-  jackett-config:
-  qbittorrent-config:
+  jackett:
+    external: true
+  qbittorrent:
+    external: true

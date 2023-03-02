@@ -6,7 +6,7 @@ services:
     hostname: redis
     command: redis-server --requirepass ${REDIS_PASSWORD}
     volumes:
-      - redis-data:/data
+      - redis:/data
     ports:
       - 6379:6379
     restart: always
@@ -18,4 +18,5 @@ networks:
     external: true
 
 volumes:
-  redis-data:
+  redis:
+    external: true

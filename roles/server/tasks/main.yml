@@ -5,6 +5,10 @@
     mode: 0600
   become: true
 
+- name: Install docker local-persist plugin
+  shell: "curl -fsSL https://raw.githubusercontent.com/MatchbookLab/local-persist/master/scripts/install.sh | bash"
+  become: true
+
 - name: Install postgres
   include_role:
     name: postgres

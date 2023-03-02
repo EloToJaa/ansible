@@ -9,7 +9,7 @@ services:
       - WEBSOCKET_ENABLED=true
       - ADMIN_TOKEN=${VAULT_TOKEN}
     volumes:
-      - vaultwarden-data:/data
+      - vaultwarden:/data
     restart: unless-stopped
     networks:
       - proxy
@@ -22,4 +22,5 @@ networks:
     external: true
 
 volumes:
-  vaultwarden-data:
+  vaultwarden:
+    external: true

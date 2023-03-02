@@ -4,7 +4,7 @@ services:
     image: maxwaldorf/guacamole
     container_name: guacamole
     volumes:
-      - guacamole-config:/config
+      - guacamole:/config
     networks:
       - proxy
 
@@ -13,4 +13,5 @@ networks:
     external: true
 
 volumes:
-  guacamole-config:
+  guacamole:
+    external: true

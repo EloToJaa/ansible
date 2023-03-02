@@ -9,7 +9,7 @@ services:
       - TZ={{ timezone }}
       - DOCKER_MODS=ghcr.io/gilbn/theme.park:bazarr
     volumes:
-      - bazarr-config:/config
+      - bazarr:/config
       - {{ data_dir }}/Torrents:/torrents
     restart: unless-stopped
     networks:
@@ -23,4 +23,5 @@ networks:
     external: true
 
 volumes:
-  bazarr-config:
+  bazarr:
+    external: true

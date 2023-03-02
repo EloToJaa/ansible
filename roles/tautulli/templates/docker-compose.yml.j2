@@ -9,7 +9,7 @@ services:
       - TZ={{ timezone }}
       - DOCKER_MODS=ghcr.io/gilbn/theme.park:tautulli
     volumes:
-      - tautulli-data:/config
+      - tautulli:/config
     restart: unless-stopped
     networks:
       - proxy
@@ -22,4 +22,5 @@ networks:
     external: true
 
 volumes:
-  tautulli-data:
+  tautulli:
+    external: true

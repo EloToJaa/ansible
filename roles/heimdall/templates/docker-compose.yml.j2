@@ -8,7 +8,7 @@ services:
       - PGID=${USER_GID}
       - TZ={{ timezone }}
     volumes:
-      - heimdall-config:/config
+      - heimdall:/config
     networks:
       - proxy
 
@@ -17,4 +17,5 @@ networks:
     external: true
 
 volumes:
-  heimdall-config:
+  heimdall:
+    external: true

@@ -4,7 +4,7 @@ services:
     image: louislam/uptime-kuma:1
     container_name: uptime
     volumes:
-      - uptime-data:/app/data
+      - uptime:/app/data
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped
@@ -19,4 +19,5 @@ networks:
     external: true
 
 volumes:
-  uptime-data:
+  uptime:
+    external: true

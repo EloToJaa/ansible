@@ -9,7 +9,7 @@ services:
       - TZ={{ timezone }}
       - DOCKER_MODS=ghcr.io/gilbn/theme.park:sonarr
     volumes:
-      - sonarr-data:/config
+      - sonarr:/config
       - {{ data_dir }}/Torrents:/torrents
     restart: unless-stopped
     networks:
@@ -23,4 +23,5 @@ networks:
     external: true
 
 volumes:
-  sonarr-data:
+  sonarr:
+    external: true
