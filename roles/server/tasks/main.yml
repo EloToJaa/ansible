@@ -26,6 +26,16 @@
     name: redis
   when: software|select("equalto", "redis")
 
+- name: Install mongodb
+  include_role:
+    name: mongo
+  when: software|select("equalto", "mongo")
+
+- name: Install mongo-express
+  include_role:
+    name: mongo-express
+  when: software|select("equalto", "mongo-express")
+
 - name: Install authelia
   include_role:
     name: authelia

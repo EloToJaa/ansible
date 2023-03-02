@@ -11,6 +11,8 @@ software:
   - guacamole
   - heimdall
   - notifiarr
+  - mongo
+  - mongo-express
   - ombi
   - plex
   - pmm
