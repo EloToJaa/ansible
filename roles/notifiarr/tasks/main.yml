@@ -15,7 +15,6 @@
     mode: 0600
   with_items:
     - docker-compose.yml
-    - notifiarr.conf
   become: true
 
 - name: Delete .env file

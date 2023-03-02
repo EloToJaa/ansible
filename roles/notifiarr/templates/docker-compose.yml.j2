@@ -19,7 +19,6 @@ services:
       - DN_TAUTULLI_API_KEY=${TAUTULLI_API}
     volumes:
       - /var/run/utmp:/var/run/utmp
-      - ${DOCKER_DIR}/notifiarr/notifiarr.conf:/config/notifiarr.conf
     restart: always
     networks:
       - proxy
