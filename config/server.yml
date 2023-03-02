@@ -12,7 +12,6 @@ software:
   - notifiarr
   - ombi
   - plex
-  - plextrakt
   - pmm
   - portainer
   - postgres

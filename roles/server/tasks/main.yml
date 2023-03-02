@@ -70,11 +70,6 @@
     name: plex
   when: software|select("equalto", "plex")
 
-- name: Install plextrakt
-  include_role:
-    name: plextrakt
-  when: software|select("equalto", "plextrakt")
-
 - name: Install pmm
   include_role:
     name: pmm
