@@ -35,6 +35,7 @@
   
 - name: "Create {{ role_name }} volume"
   shell: "docker volume create -d local-persist -o mountpoint={{ volumes_dir }}/{{ role_name }} --name={{ role_name }}"
+  become: true
 
 - name: "Run {{ role_name }}"
   community.docker.docker_compose:
