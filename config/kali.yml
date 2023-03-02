@@ -1,4 +1,5 @@
 software:
+  - zsh
   - docker
   - ssh
   - vnc

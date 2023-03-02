@@ -1,4 +1,5 @@
 software:
+  - zsh
   - ssh
   - samba
   - docker

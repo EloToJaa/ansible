@@ -10,11 +10,6 @@
     line: "source $HOME/.user_settings"
     insertafter: EOF
 
-# - name: Install starship
-#   ansible.builtin.shell: >
-#     wget https://starship.rs/install.sh -O install.sh && sh install.sh -y && rm install.sh
-#   become: true
-
 - name: Install starship
   block:
     - name: Download starship
