@@ -82,7 +82,7 @@ storage:
     database: authelia
     schema: public
     username: {{ var.POSTGRES_USER }}
-    password: ${POSTGRES_PASSWORD}
+    password: {{ var.POSTGRES_PASSWORD }}
     ssl:
       mode: disable
   
