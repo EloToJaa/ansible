@@ -4,8 +4,8 @@ services:
     image: lscr.io/linuxserver/plex-meta-manager:latest
     container_name: plex-meta-manager
     environment:
-      - PUID={{ var.USER_UID }}
-      - PGID={{ var.USER_GID }}
+      - PUID=${USER_UID}
+      - PGID=${USER_GID}
       - TZ={{ timezone }}
       - PMM_TIME={{ pmm_time }}
     volumes:

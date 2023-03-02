@@ -4,8 +4,8 @@ services:
     image: lscr.io/linuxserver/tautulli:latest
     container_name: tautulli
     environment:
-      - PUID={{ var.USER_UID }}
-      - PGID={{ var.USER_GID }}
+      - PUID=${USER_UID}
+      - PGID=${USER_GID}
       - TZ={{ timezone }}
       - DOCKER_MODS=ghcr.io/gilbn/theme.park:tautulli
     volumes:

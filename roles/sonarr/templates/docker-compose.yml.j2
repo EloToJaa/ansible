@@ -4,8 +4,8 @@ services:
     image: ghcr.io/linuxserver/sonarr
     container_name: sonarr
     environment:
-      - PUID={{ var.USER_UID }}
-      - PGID={{ var.USER_GID }}
+      - PUID=${USER_UID}
+      - PGID=${USER_GID}
       - TZ={{ timezone }}
       - DOCKER_MODS=ghcr.io/gilbn/theme.park:sonarr
     volumes:

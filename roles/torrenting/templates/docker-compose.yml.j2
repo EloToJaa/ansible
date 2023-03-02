@@ -4,12 +4,12 @@ services:
     container_name: qbittorrent
     image: cr.hotio.dev/hotio/qbittorrent:latest
     environment:
-      - PUID={{ var.USER_UID }}
-      - PGID={{ var.USER_GID }}
+      - PUID=${USER_UID}
+      - PGID=${USER_GID}
       - UMASK=002
       - TZ={{ timezone }}
       - VPN_ENABLED=true
-      - VPN_LAN_NETWORK={{ var.LOCAL_NETWORK }}
+      - VPN_LAN_NETWORK=${LOCAL_NETWORK}
       - VPN_CONF=wg0
       - VPN_IP_CHECK_DELAY=5
       - VPN_ADDITIONAL_PORTS=9696/tcp,9117/tcp
@@ -28,12 +28,12 @@ services:
     labels:
       traefik.enable: true
       traefik.http.routers.qbittorrent.entryPoints: https
-      traefik.http.routers.qbittorrent.rule: Host(`download.{{ var.DOMAIN }}`, `download.local.{{ var.DOMAIN }}`)
+      traefik.http.routers.qbittorrent.rule: Host(`download.${DOMAIN}`, `download.local.${DOMAIN}`)
       traefik.http.routers.qbittorrent.service: qbittorrent
       traefik.http.services.qbittorrent.loadbalancer.server.port: 8080
 
       traefik.http.routers.jackett.entryPoints: https
-      traefik.http.routers.jackett.rule: Host(`jackett.local.{{ var.DOMAIN }}`)
+      traefik.http.routers.jackett.rule: Host(`jackett.local.${DOMAIN}`)
       traefik.http.routers.jackett.service: jackett
       traefik.http.services.jackett.loadbalancer.server.port: 9117
   
@@ -42,8 +42,8 @@ services:
     container_name: jackett
     network_mode: "service:qbittorrent"
     environment:
-      - PUID={{ var.USER_UID }}
-      - PGID={{ var.USER_GID }}
+      - PUID=${USER_UID}
+      - PGID=${USER_GID}
       - TZ={{ timezone }}
       - DOCKER_MODS=ghcr.io/gilbn/theme.park:jackett
     volumes:

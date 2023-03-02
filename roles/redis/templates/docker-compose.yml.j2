@@ -4,7 +4,7 @@ services:
     image: redis:alpine
     container_name: redis
     hostname: redis
-    command: redis-server --requirepass {{ var.REDIS_PASSWORD }}
+    command: redis-server --requirepass ${REDIS_PASSWORD}
     volumes:
       - redis-data:/data
     ports:

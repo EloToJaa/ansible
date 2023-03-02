@@ -5,7 +5,7 @@ services:
     container_name: redis-commander
     environment:
       - REDIS_HOST=redis
-      - REDIS_PASSWORD={{ var.REDIS_PASSWORD }}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
     networks:
       - proxy
 

@@ -1,5 +1,5 @@
 users:
-  elotoja: #username
+  {{ var.AUTH_USER }}: #username
     displayname: {{ var.AUTH_USER }}
     password: {{ var.AUTH_PASSWORD }} #https://argon2.online/
     email: {{ var.AUTH_EMAIL }}

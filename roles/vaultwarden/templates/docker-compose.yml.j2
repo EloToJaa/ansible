@@ -7,7 +7,7 @@ services:
       - SIGNUPS_ALLOWED=false
       - INVITATIONS_ALLOWED=false
       - WEBSOCKET_ENABLED=true
-      - ADMIN_TOKEN={{ var.VAULT_TOKEN }}
+      - ADMIN_TOKEN=${VAULT_TOKEN}
     volumes:
       - vaultwarden-data:/data
     restart: unless-stopped

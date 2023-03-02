@@ -11,7 +11,7 @@ services:
     labels:
       traefik.enable: true
       traefik.http.routers.requestrr.entryPoints: https
-      traefik.http.routers.requestrr.rule: Host(`requestrr.local.{{ var.DOMAIN }}`)
+      traefik.http.routers.requestrr.rule: Host(`requestrr.local.${DOMAIN}`)
       traefik.http.services.requestrr.loadbalancer.server.port: 4545
       traefik.http.routers.requestrr.middlewares: tp-requestrr@file
 

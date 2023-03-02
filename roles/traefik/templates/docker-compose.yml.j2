@@ -11,7 +11,7 @@ services:
     environment:
       - TZ={{ timezone }}
       - DOCKER_HOST=dockersocket
-      - CF_DNS_API_TOKEN={{ var.API_TOKEN }}
+      - CF_DNS_API_TOKEN=${API_TOKEN}
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - {{ home }}/cert/acme.json:/etc/traefik/acme.json
@@ -19,7 +19,7 @@ services:
       - {{ docker_dir }}/traefik/fileConfig.yml:/etc/traefik/fileConfig.yml:ro
     labels:
       traefik.enable: true
-      traefik.http.routers.api.rule: Host(`proxy.{{ var.DOMAIN }}`, `proxy.local.{{ var.DOMAIN }}`)
+      traefik.http.routers.api.rule: Host(`proxy.${DOMAIN}`, `proxy.local.${DOMAIN}`)
       traefik.http.routers.api.entryPoints: https
       traefik.http.routers.api.service: api@internal
       traefik.http.routers.api.middlewares: auth@file
