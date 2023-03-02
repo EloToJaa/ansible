@@ -23,6 +23,7 @@
     state: hard
     src: "{{ docker_dir }}/.env"
     dest: "{{ docker_dir }}/{{ role_name }}/.env"
+  become: true
 
 - name: "Run {{ role_name }}"
   community.docker.docker_compose:
