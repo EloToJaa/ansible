@@ -14,7 +14,7 @@ services:
       - CF_DNS_API_TOKEN=${API_TOKEN}
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ${HOME_DIR}/cert/acme.json:/etc/traefik/acme.json
+      - ${USER_DIR}/cert/acme.json:/etc/traefik/acme.json
       - ${DOCKER_DIR}/traefik/traefik.yml:/etc/traefik/traefik.yml:ro
       - ${DOCKER_DIR}/traefik/fileConfig.yml:/etc/traefik/fileConfig.yml:ro
     labels:
