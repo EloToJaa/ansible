@@ -46,7 +46,6 @@ services:
       - PUID=${USER_UID}
       - PGID=${USER_GID}
       - TZ=${TZ}
-      - DOCKER_MODS=ghcr.io/gilbn/theme.park:jackett
     volumes:
       - jackett:/config
     depends_on:
