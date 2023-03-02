@@ -111,20 +111,3 @@
       file:
         path: "{{ home }}/FiraCode.zip"
         state: absent
-
-# - name: Install Fira Code Nerdfont
-#   shell: >
-#     wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/FiraCode.zip -O FiraCode.zip && unzip FiraCode.zip -d FiraCode && mv FiraCode/*.ttf /usr/share/fonts/ && rm -rf FiraCode FiraCode.zip
-#   become: true
-
-
-# - name: Change ownership of directories
-#   file:
-#     state: directory
-#     recurse: yes
-#     path: "/{{ home }}/{{ item }}"
-#     owner: "{{ username }}"
-#     group: "{{ username }}"
-#     mode: 0755
-#   with_items: "{{ dirs }}"
-#   become: true

@@ -93,8 +93,11 @@ certificatesResolvers:
           - "1.1.1.1:53"
           - "1.0.0.1:53"
 
-# experimental:
-#   plugins:
-#     traefik-themepark:
-#       moduleName: "github.com/packruler/traefik-themepark"
-#       version: "v1.2.2"
+experimental:
+  plugins:
+    traefik-themepark:
+      moduleName: "github.com/packruler/traefik-themepark"
+      version: "v1.2.2"
+    sablier:
+      moduleName: "github.com/acouvreur/sablier"
+      version: "v1.2.0"
