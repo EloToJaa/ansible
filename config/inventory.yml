@@ -44,6 +44,7 @@ all:
 
     docker_dir: "/opt/docker"
     data_dir: "/data"
+    volumes_dir: "/opt/volumes"
 
     # You can set it to a different port in order to avoid automated scanner bots
     ssh_port: 22
