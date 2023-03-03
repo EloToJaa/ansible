@@ -2,7 +2,7 @@ software:
   - zsh
   - docker
   - ssh
-  - vnc
+#  - vnc
   - samba
   - brave
   - vscode
@@ -12,7 +12,7 @@ software:
   - rust
   - ghidra
   - gdb
-  - qemu
+#  - qemu
 
 apt_software:
   - terminator
