@@ -35,7 +35,7 @@ http:
         - start-grafana@file
       service: grafana
     heimdall:
-      rule: Host(`elotoja.com`, `local.elotoja.com`)
+      rule: Host(`heimdall.elotoja.com`, `heimdall.local.elotoja.com`)
       entryPoints:
         - https
       middlewares:
