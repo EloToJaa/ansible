@@ -3,6 +3,14 @@
     upgrade: yes
     autoremove: yes
     update_cache: yes
+  when: "'{{ ansible_distribution }}' != 'Fedora'"
+  become: true
+
+- name: Upgrade all dnf packages
+  dnf:
+    name: "*"
+    state: latest
+  when: "'{{ ansible_distribution }}' == 'Fedora'"
   become: true
 
 - name: Install unattended upgrades package
@@ -28,6 +36,15 @@
     update_cache: yes
     name: "{{ apt_software }}"
     state: present
+  when: "'{{ ansible_distribution }}' != 'Fedora'"
+  become: true
+
+- name: Update dnf and install software
+  package:
+    update_cache: yes
+    name: "{{ dnf_software }}"
+    state: present
+  when: "'{{ ansible_distribution }}' == 'Fedora'"
   become: true
 
 - name: Install pip software
@@ -64,13 +81,6 @@
       line: "DNSStubListener=no"
   when: version == "server"
   become: true
-
-# - name: Create a symlink
-#   file:
-#     src: "/run/systemd/resolve/resolv.conf"
-#     dest: "/etc/resolv.conf"
-#     state: link
-#   become: true
 
 - name: Populate service facts
   service_facts:
