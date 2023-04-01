@@ -9,11 +9,18 @@ set -e
 
 echo "This script will configure a linux machine"
 
-# update packages
-echo "Updating system"
-sudo apt update
-sudo apt upgrade -y
-sudo apt install -y git python3-pip python3-venv pipx ansible
+echo "Do you want to upgrade? (y/n)"
+read upgrade
+if [ $upgrade = "y" ]; then
+    # update packages
+    echo "Upgrading system"
+    sudo apt update
+    sudo apt upgrade -y
+    sudo apt install -y git python3-pip python3-venv pipx ansible
+else
+    echo "Not upgrading packages"
+fi
+
 
 # check if ansible dir exists if it does delete it
 if [ -d "ansible" ]; then

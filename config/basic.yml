@@ -5,3 +5,8 @@ apt_software:
   - gcc
   - g++
   - make
+
+dnf_software:
+  - gcc
+  - g++
+  - make
