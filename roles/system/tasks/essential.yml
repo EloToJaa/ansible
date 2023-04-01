@@ -64,6 +64,7 @@
   locale_gen:
     name: "{{ locale }}"
     state: present
+  when: "'{{ ansible_distribution }}' != 'Fedora'"
   become: true
 
 - name: Update SSH configuration to change dns
