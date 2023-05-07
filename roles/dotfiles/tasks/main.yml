@@ -12,6 +12,7 @@
         group: "{{ username }}"
         mode: 0644
       with_items: "{{ dotfiles }}"
+      become: true
     - name: "Create dotfiles"
       template:
         src: "{{ item.name }}.j2"
@@ -20,4 +21,4 @@
         group: "{{ username }}"
         mode: 0644
       with_items: "{{ dotfiles }}"
-  become: true
+      become: true
