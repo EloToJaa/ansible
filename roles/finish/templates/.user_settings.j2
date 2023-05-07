@@ -2,6 +2,10 @@ export STARSHIP_CONFIG=$HOME/.config/starship.toml
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:/bin/snap
 export XDG_CONFIG_HOME=$HOME/.config
+{% if software|select("equalto", "neovim") %}
+export EDITOR=nvim
+export PATH=$PATH:/opt/nvim/bin
+{% endif %}
 {% if software|select("equalto", "rust") %}
 export PATH=$HOME/.cargo/bin:$PATH
 {% endif %}
@@ -27,6 +31,9 @@ alias webup='sudo python -m http.server 80'
 alias ftpup='sudo python -m pyftpdlib -p 21'
 alias smbup='sudo python3 /usr/share/doc/python3-impacket/examples/smbserver.py -smb2support share $(pwd)'
 alias pipz_upgrade='pip freeze > requirements.txt; pip install -r requirements.txt --upgrade; rm requirements.txt;'
+{% if software|select("equalto", "neovim") %}
+alias vim='nvim'
+{% endif %}
 {% if version == "kali" %}
 alias vpn-htb='sudo openvpn --config /mnt/Dev/ctf/OpenVPN/HTB.ovpn'
 alias vpn-thm='sudo openvpn --config /mnt/Dev/ctf/OpenVPN/THM.ovpn'

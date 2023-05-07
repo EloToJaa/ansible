@@ -17,3 +17,13 @@
   include_role:
     name: dotfiles
   when: software|select("equalto", "dotfiles")
+
+- name: Install neovim
+  include_role:
+    name: neovim
+  when: software|select("equalto", "neovim")
+
+- name: Install rust
+  include_role:
+    name: rust
+  when: software|select("equalto", "rust")

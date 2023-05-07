@@ -1,0 +1,23 @@
+- name: Install neovim
+  block:
+    - name: Download neovim
+      get_url:
+        url: https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz
+        dest: "/tmp/nvim.tar.gz"
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        mode: 0644
+      become: true
+    - name: Extract neovim
+      unarchive:
+        src: "/tmp/nvim.tar.gz"
+        dest: "/opt/nvim"
+        remote_src: yes
+        owner: "{{ username }}"
+        group: "{{ username }}"
+      become: true
+    - name: Remove neovim tar.gz file
+      file:
+        path: "/tmp/nvim.tar.gz"
+        state: absent
+      become: true
