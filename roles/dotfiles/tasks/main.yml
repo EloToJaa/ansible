@@ -2,8 +2,6 @@
   git:
     repo: https://github.com/tmux-plugins/tpm
     dest: "{{ home }}/.tmux/plugins/tpm"
-    owner: "{{ username }}"
-    group: "{{ username }}"
 
 - name: Create dotfiles
   vars:
