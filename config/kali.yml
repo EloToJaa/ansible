@@ -4,6 +4,7 @@ software:
   - ssh
   - vnc
   - nfs
+  - dotfiles
   - brave
   - vscode
   - sublime
@@ -25,6 +26,7 @@ apt_software:
   - ruby
   - default-jdk-headless
   - gradle
+  - maven
   - neovim
   - ripgrep
   - rlwrap
@@ -40,6 +42,7 @@ apt_software:
 pipx_software:
   - pwntools
   - pwncat-cs
+  - impacket
 
 pip_software:
   - requests

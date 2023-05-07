@@ -12,3 +12,8 @@
   include_role:
     name: gdb
   when: software|select("equalto", "gdb")
+
+- name: Create dotfiles
+  include_role:
+    name: dotfiles
+  when: software|select("equalto", "dotfiles")

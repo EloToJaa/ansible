@@ -9,9 +9,9 @@ docker_dir: /mnt/Server/Docker
 data_dir: /mnt/Data
 run_containers: true
 
-# Samba shares
+# NFS shares
 shares:
-  - uri: "//IP/Share"
+  - uri: "nfs://IP/Share"
     mountpoint: "/mnt/Share"
 
 additional_software:
