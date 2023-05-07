@@ -1,7 +1,7 @@
 software:
   - zsh
   - ssh
-  - samba
+  - nfs
   - docker
   - adminer
   - apache

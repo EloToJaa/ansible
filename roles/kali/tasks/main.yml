@@ -3,18 +3,6 @@
     name: ngrok
   when: software|select("equalto", "ngrok")
 
-- block:
-    - name: Install go
-      include_role:
-        name: fubarhouse.golang
-      when: software|select("equalto", "go")
-  become: true
-
-- name: Install rust
-  include_role:
-    name: rust
-  when: software|select("equalto", "rust")
-
 - name: Install ghidra
   include_role:
     name: ghidra

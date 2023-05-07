@@ -1,6 +1,5 @@
 ---
 roles:
-  - name: fubarhouse.golang
   - name: vaulttec.zsh
 collections:
   - name: community.docker

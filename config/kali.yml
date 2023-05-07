@@ -2,29 +2,44 @@ software:
   - zsh
   - docker
   - ssh
-#  - vnc
-  - samba
+  - vnc
+  - nfs
   - brave
   - vscode
   - sublime
   - ngrok
-  - go
-  - rust
   - ghidra
   - gdb
-#  - qemu
 
 apt_software:
-  - terminator
+  - alacritty
   - jadx
   - apktool
   - gcc
   - g++
+  - golang
+  - rustc
   - make
   - nodejs
   - npm
   - ruby
+  - default-jdk-headless
+  - gradle
+  - neovim
+  - ripgrep
+  - rlwrap
+  - tmux
+  - default-mysql-client
+  - bloodhound
+  - neo4j
+  - seclists
+  - chromium
+  - zoxide
+  - fzf
 
 pipx_software:
   - pwntools
   - pwncat-cs
+
+pip_software:
+  - requests

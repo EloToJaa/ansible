@@ -1,0 +1,25 @@
+- name: Install NFS utilities
+  package:
+    name: nfs-common
+    state: present
+  become: true
+
+- name: Create mountpoints
+  file:
+    path: "{{ item.mountpoint }}"
+    state: directory
+    mode: 0755
+    owner: root
+    group: root
+  with_items: "{{ shares }}"
+  become: true
+
+- name: Mount network share
+  ansible.posix.mount:
+    src: "{{ item.uri }}"
+    path: "{{ item.mountpoint }}"
+    fstype: nfs
+    opts: "rw,hard,intr,noatime"
+    state: mounted
+  with_items: "{{ shares }}"
+  become: true

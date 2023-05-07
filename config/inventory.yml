@@ -103,6 +103,7 @@ all:
       - dotenv
       - python
       - vscode
+      - vi-mode
 
     zsh_ohmy_disable_auto_update: false
 
