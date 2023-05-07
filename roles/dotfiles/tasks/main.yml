@@ -10,7 +10,7 @@
         state: directory
         owner: "{{ username }}"
         group: "{{ username }}"
-        mode: 0644
+        mode: 0775
       with_items: "{{ dotfiles }}"
       become: true
     - name: "Create dotfiles"
@@ -19,6 +19,6 @@
         dest: "{{ item.dir }}/{{ item.name }}"
         owner: "{{ username }}"
         group: "{{ username }}"
-        mode: 0644
+        mode: 0775
       with_items: "{{ dotfiles }}"
       become: true
