@@ -1,11 +1,23 @@
 - name: "Create dotfiles"
-  template:
-    src: "{{ item.name }}.j2"
-    dest: "{{ item.dir }}/{{ item.name }}"
-    owner: "{{ username }}"
-    group: "{{ username }}"
-    mode: 0644
-  with_items:
-    - { dir: "{{ home }}", name: ".tmux.conf" }
-    - { dir: "{{ home }}/.config/alacritty", name: "alacritty.yml" }
+  vars:
+    dotfiles:
+      - { dir: "{{ home }}", name: ".tmux.conf" }
+      - { dir: "{{ home }}/.config/alacritty", name: "alacritty.yml" }
+  block:
+    - name: "Create dotfiles directory"
+      file:
+        path: "{{ item.dir }}"
+        state: directory
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        mode: 0644
+      with_items: "{{ dotfiles }}"
+    - name: "Create dotfiles"
+      template:
+        src: "{{ item.name }}.j2"
+        dest: "{{ item.dir }}/{{ item.name }}"
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        mode: 0644
+      with_items: "{{ dotfiles }}"
   become: true
