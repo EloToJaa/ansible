@@ -1,10 +1,17 @@
-- name: "Create dotfiles"
+- name: Clone Tmux Plugin Manager
+  git:
+    repo: https://github.com/tmux-plugins/tpm
+    dest: "{{ home }}/.tmux/plugins/tpm"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+
+- name: Create dotfiles
   vars:
     dotfiles:
       - { dir: "{{ home }}", name: ".tmux.conf" }
       - { dir: "{{ home }}/.config/alacritty", name: "alacritty.yml" }
   block:
-    - name: "Create dotfiles directory"
+    - name: Create dotfiles directory
       file:
         path: "{{ item.dir }}"
         state: directory
@@ -13,7 +20,7 @@
         mode: 0775
       with_items: "{{ dotfiles }}"
       become: true
-    - name: "Create dotfiles"
+    - name: Create dotfiles
       template:
         src: "{{ item.name }}.j2"
         dest: "{{ item.dir }}/{{ item.name }}"
