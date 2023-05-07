@@ -8,18 +8,10 @@
         group: "{{ username }}"
         mode: 0644
       become: true
-    - name: Create neovim directory
-      file:
-        path: "/opt/nvim"
-        state: directory
-        owner: "{{ username }}"
-        group: "{{ username }}"
-        mode: 0775
-      become: true
     - name: Extract neovim
       unarchive:
         src: "/tmp/nvim.tar.gz"
-        dest: "/opt/nvim"
+        dest: "/opt/"
         remote_src: yes
         owner: "{{ username }}"
         group: "{{ username }}"

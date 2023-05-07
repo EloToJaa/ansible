@@ -4,7 +4,7 @@ export PATH=$PATH:/bin/snap
 export XDG_CONFIG_HOME=$HOME/.config
 {% if software|select("equalto", "neovim") %}
 export EDITOR=nvim
-export PATH=$PATH:/opt/nvim/bin
+export PATH=$PATH:/opt/nvim-linux64/bin
 {% endif %}
 {% if software|select("equalto", "rust") %}
 export PATH=$HOME/.cargo/bin:$PATH
