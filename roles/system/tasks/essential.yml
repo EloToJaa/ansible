@@ -3,21 +3,12 @@
     upgrade: yes
     autoremove: yes
     update_cache: yes
-  when: "'{{ ansible_distribution }}' != 'Fedora'"
-  become: true
-
-- name: Upgrade all dnf packages
-  dnf:
-    name: "*"
-    state: latest
-  when: "'{{ ansible_distribution }}' == 'Fedora'"
   become: true
 
 - name: Install unattended upgrades package
   package:
     name: unattended-upgrades
     state: present
-  when: "'{{ ansible_distribution }}' != 'Fedora'"
   become: true
 
 - name: Copy unattended-upgrades configuration files in place
@@ -30,7 +21,6 @@
   with_items:
     - 10periodic
     - 50unattended-upgrades
-  when: "'{{ ansible_distribution }}' != 'Fedora'"
   become: true
 
 - name: Update apt and install software
@@ -38,15 +28,6 @@
     update_cache: yes
     name: "{{ apt_software }}"
     state: present
-  when: "'{{ ansible_distribution }}' != 'Fedora'"
-  become: true
-
-- name: Update dnf and install software
-  package:
-    update_cache: yes
-    name: "{{ dnf_software }}"
-    state: present
-  when: "'{{ ansible_distribution }}' == 'Fedora'"
   become: true
 
 - name: Install pip software
@@ -64,7 +45,6 @@
   locale_gen:
     name: "{{ locale }}"
     state: present
-  when: "'{{ ansible_distribution }}' != 'Fedora'"
   become: true
 
 - name: Update SSH configuration to change dns
