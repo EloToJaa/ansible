@@ -37,6 +37,8 @@ apt_software:
   - chromium
   - zoxide
   - fzf
+  - gobuster
+  - feroxbuster
 
 pipx_software:
   - pwntools
