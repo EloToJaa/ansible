@@ -57,7 +57,7 @@
     mode: 0644
   with_items:
     - regexp: "^#?DNS="
-      line: "DNS=192.168.0.40"
+      line: "DNS=192.168.0.31"
     - regexp: "^#?FallbackDNS="
       line: "FallbackDNS=1.1.1.1"
     - regexp: "^#?DNSStubListener="
