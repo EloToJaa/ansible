@@ -1,3 +1,12 @@
+- name: Create docker directory
+  file:
+    path: "{{ docker_dir }}"
+    state: directory
+    mode: 0755
+    owner: {{ username }}
+    group: {{ username }}
+  become: true
+
 - name: Create .env file
   template:
     src: .env.j2
