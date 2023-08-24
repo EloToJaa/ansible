@@ -4,7 +4,6 @@
     state: directory
     owner: "{{ username }}"
     group: "{{ username }}"
-  become: true
 
 - name: "Copy {{ role_name }} files"
   template:
