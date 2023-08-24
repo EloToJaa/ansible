@@ -2,3 +2,9 @@
   set_fact:
     software: "{{ software + additional_software }}"
   when: additional_software is defined
+
+- name: Remove .oh-my-zsh if it exists
+  file:
+    path: "{{ home_dir }}/.oh-my-zsh"
+    state: absent
+  when: software|select("equalto", "zsh")
