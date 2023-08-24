@@ -11,7 +11,7 @@
   template:
     src: .env.j2
     dest: "{{ docker_dir }}/.env"
-    mode: 0600
+    mode: 0644
   when: version == "server"
   become: true
 

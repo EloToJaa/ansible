@@ -11,7 +11,7 @@
     dest: "{{ docker_dir }}/{{ role_name }}/{{ item }}"
     owner: "{{ username }}"
     group: "{{ username }}"
-    mode: 0600
+    mode: 0644
   with_items:
     - docker-compose.yml
 
@@ -44,7 +44,7 @@
     state: hard
     src: "{{ docker_dir }}/.env"
     dest: "{{ docker_dir }}/{{ role_name }}/.env"
-    mode: 0600
+    mode: 0644
 
 - name: "Run {{ role_name }}"
   community.docker.docker_compose:
