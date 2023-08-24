@@ -17,7 +17,6 @@
     - config.yml
     - TV.yml
     - Movies.yml
-  become: true
 
 - name: Delete .env file
   file:

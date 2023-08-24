@@ -16,7 +16,6 @@
     - docker-compose.yml
     - fileConfig.yml
     - traefik.yml
-  become: true
 
 - name: "Create directory for certs"
   file:

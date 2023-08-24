@@ -21,7 +21,6 @@
     state: directory
     owner: "{{ username }}"
     group: "{{ username }}"
-  become: true
 
 - name: "Create config.json"
   template:
@@ -32,7 +31,6 @@
     mode: 0644
   with_items:
     - config.json
-  become: true
 
 - name: Delete .env file
   file:

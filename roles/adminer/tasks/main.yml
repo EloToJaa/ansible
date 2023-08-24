@@ -15,7 +15,6 @@
   with_items:
     - docker-compose.yml
     - adminer.css
-  become: true
 
 - name: Delete .env file
   file:

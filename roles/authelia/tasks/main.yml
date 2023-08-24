@@ -16,7 +16,6 @@
     - docker-compose.yml
     - configuration.yml
     - users_database.yml
-  become: true
 
 - name: Delete .env file
   file:
