@@ -12,6 +12,7 @@
     owner: root
     group: root
   with_items: "{{ shares }}"
+  ignore_errors: true
   become: true
 
 - name: Mount network share
@@ -22,4 +23,5 @@
     opts: "rw,hard,intr,noatime"
     state: mounted
   with_items: "{{ shares }}"
+  ignore_errors: true
   become: true
