@@ -30,14 +30,6 @@
     dest: "{{ docker_dir }}/{{ role_name }}/.env"
     mode: 0600
   become: true
-  
-- name: "Create qbittorrent volume"
-  shell: "docker volume create -d local-persist -o mountpoint={{ volumes_dir }}/qbittorrent --name=qbittorrent"
-  become: true
-
-- name: "Create jackett volume"
-  shell: "docker volume create -d local-persist -o mountpoint={{ volumes_dir }}/jackett --name=jackett"
-  become: true
 
 - name: "Run {{ role_name }}"
   community.docker.docker_compose:

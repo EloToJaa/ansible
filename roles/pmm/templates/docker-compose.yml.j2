@@ -9,7 +9,7 @@ services:
       - TZ=${TZ}
       - PMM_TIME={{ pmm_time }}
     volumes:
-      - pmm:/config
+      - ${VOLUMES_DIR}/pmm:/config
       - ${DOCKER_DIR}/pmm/config.yml:/config/config.yml
       - ${DOCKER_DIR}/pmm/TV.yml:/config/TV.yml
       - ${DOCKER_DIR}/pmm/Movies.yml:/config/Movies.yml
@@ -19,8 +19,4 @@ services:
 
 networks:
   proxy:
-    external: true
-
-volumes:
-  pmm:
     external: true

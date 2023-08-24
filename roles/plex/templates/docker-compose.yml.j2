@@ -10,10 +10,6 @@ services:
       - VERSION=docker
       - PLEX_CLAIM=${PLEX_CLAIM}
     volumes:
-      - plex:/config
+      - ${VOLUMES_DIR}/plex:/config
       - ${MEDIA_DIR}/Media/:/data
     restart: unless-stopped
-
-volumes:
-  plex:
-    external: true

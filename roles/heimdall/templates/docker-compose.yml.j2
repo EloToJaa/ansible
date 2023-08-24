@@ -8,14 +8,10 @@ services:
       - PGID=${USER_GID}
       - TZ=${TZ}
     volumes:
-      - heimdall:/config
+      - ${VOLUMES_DIR}/heimdall:/config
     networks:
       - proxy
 
 networks:
   proxy:
-    external: true
-
-volumes:
-  heimdall:
     external: true

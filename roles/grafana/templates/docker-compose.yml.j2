@@ -4,14 +4,10 @@ services:
     image: grafana/grafana-oss:latest
     container_name: grafana
     volumes:
-      - grafana:/var/lib/grafana
+      - ${VOLUMES_DIR}/grafana:/var/lib/grafana
     networks:
       - proxy
 
 networks:
   proxy:
-    external: true
-
-volumes:
-  grafana:
     external: true

@@ -4,7 +4,7 @@ services:
     image: louislam/uptime-kuma:1
     container_name: uptime
     volumes:
-      - uptime:/app/data
+      - ${VOLUMES_DIR}/uptime:/app/data
       - /var/run/docker.sock:/var/run/docker.sock:ro
     security_opt:
       - no-new-privileges:true
@@ -17,8 +17,4 @@ services:
 
 networks:
   proxy:
-    external: true
-
-volumes:
-  uptime:
     external: true

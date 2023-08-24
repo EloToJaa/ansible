@@ -15,11 +15,6 @@
   when: version == "server"
   become: true
 
-- name: Install docker local-persist plugin
-  shell: "curl -fsSL https://raw.githubusercontent.com/MatchbookLab/local-persist/master/scripts/install.sh | bash"
-  when: version == "server"
-  become: true
-
 - name: Install sablier
   include_role:
     name: sablier

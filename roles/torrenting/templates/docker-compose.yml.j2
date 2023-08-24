@@ -15,7 +15,7 @@ services:
       - VPN_ADDITIONAL_PORTS=9696/tcp,9117/tcp
       - PRIVOXY_ENABLED=false
     volumes:
-      - qbittorrent:/config
+      - ${VOLUMES_DIR}/qbittorrent:/config
       - ${DOCKER_DIR}/torrenting/wg0.conf:/config/wireguard/wg0.conf
       - ${MEDIA_DIR}/Media:/torrents
     cap_add:
@@ -47,17 +47,11 @@ services:
       - PGID=${USER_GID}
       - TZ=${TZ}
     volumes:
-      - jackett:/config
+      - ${VOLUMES_DIR}/jackett:/config
     depends_on:
       - qbittorrent
     restart: always
 
 networks:
   proxy:
-    external: true
-
-volumes:
-  jackett:
-    external: true
-  qbittorrent:
     external: true

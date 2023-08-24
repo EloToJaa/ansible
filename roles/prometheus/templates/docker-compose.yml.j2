@@ -5,7 +5,7 @@ services:
     container_name: prometheus
     volumes:
       - ${DOCKER_DIR}/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-      - prometheus:/prometheus
+      - ${VOLUMES_DIR}/prometheus:/prometheus
     restart: unless-stopped
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
@@ -23,8 +23,4 @@ networks:
   proxy:
     external: true
   monitoring:
-    external: true
-
-volumes:
-  prometheus:
     external: true

@@ -9,7 +9,7 @@ services:
       - TZ=${TZ}
       - DOCKER_MODS=ghcr.io/gilbn/theme.park:bazarr
     volumes:
-      - bazarr:/config
+      - ${VOLUMES_DIR}/bazarr:/config
       - ${MEDIA_DIR}/Media:/torrents
     restart: unless-stopped
     networks:
@@ -20,8 +20,4 @@ services:
 
 networks:
   proxy:
-    external: true
-
-volumes:
-  bazarr:
     external: true

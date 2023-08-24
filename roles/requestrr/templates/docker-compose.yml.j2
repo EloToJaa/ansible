@@ -4,7 +4,7 @@ services:
     container_name: requestrr
     image: darkalfx/requestrr
     volumes:
-      - requestrr:/root/config
+      - ${VOLUMES_DIR}/requestrr:/root/config
     restart: unless-stopped
     networks:
       - proxy
@@ -17,8 +17,4 @@ services:
 
 networks:
   proxy:
-    external: true
-
-volumes:
-  requestrr:
     external: true
