@@ -44,10 +44,9 @@
 
 - name: Link .env file
   file:
-    state: hard
+    state: link
     src: "{{ docker_dir }}/.env"
     dest: "{{ docker_dir }}/{{ role_name }}/.env"
-    mode: 0644
 
 - name: "Run {{ role_name }}"
   community.docker.docker_compose:
