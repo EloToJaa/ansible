@@ -5,6 +5,6 @@
 
 - name: Remove .oh-my-zsh if it exists
   file:
-    path: "{{ home_dir }}/.oh-my-zsh"
+    path: "{{ home }}/.oh-my-zsh"
     state: absent
   when: software|select("equalto", "zsh")
