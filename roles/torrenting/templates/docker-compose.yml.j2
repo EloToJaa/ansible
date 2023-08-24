@@ -17,7 +17,7 @@ services:
     volumes:
       - qbittorrent:/config
       - ${DOCKER_DIR}/torrenting/wg0.conf:/config/wireguard/wg0.conf
-      - ${DATA_DIR}/Torrents:/torrents
+      - ${MEDIA_DIR}/Media:/torrents
     cap_add:
       - NET_ADMIN
     sysctls:

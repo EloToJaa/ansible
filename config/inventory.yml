@@ -44,6 +44,7 @@ all:
 
     docker_dir: "/opt/docker"
     data_dir: "/data"
+    media_dir: "/media"
     volumes_dir: "/opt/volumes"
 
     # You can set it to a different port in order to avoid automated scanner bots

@@ -7,6 +7,7 @@ timezone: Europe/Warsaw
 # Server Docker section
 docker_dir: /mnt/Server/Docker
 data_dir: /mnt/Data
+media_dir: /mnt/Media
 run_containers: true
 
 # NFS shares

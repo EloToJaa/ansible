@@ -10,7 +10,7 @@ services:
       - DOCKER_MODS=ghcr.io/gilbn/theme.park:radarr
     volumes:
       - radarr:/config
-      - ${DATA_DIR}/Torrents:/torrents
+      - ${MEDIA_DIR}/Media:/torrents
     restart: unless-stopped
     networks:
       - proxy

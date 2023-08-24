@@ -1,7 +1,7 @@
 version: '3'
 services:
   sonarr:
-    image: ghcr.io/linuxserver/sonarr
+    image: ghcr.io/linuxserver/sonarr:develop
     container_name: sonarr
     environment:
       - PUID=${USER_UID}
@@ -10,7 +10,7 @@ services:
       - DOCKER_MODS=ghcr.io/gilbn/theme.park:sonarr
     volumes:
       - sonarr:/config
-      - ${DATA_DIR}/Torrents:/torrents
+      - ${MEDIA_DIR}/Media:/torrents
     restart: unless-stopped
     networks:
       - proxy

@@ -11,7 +11,7 @@ services:
       - PLEX_CLAIM=${PLEX_CLAIM}
     volumes:
       - plex:/config
-      - ${DATA_DIR}/Torrents/:/data
+      - ${MEDIA_DIR}/Media/:/data
     restart: unless-stopped
 
 volumes:
