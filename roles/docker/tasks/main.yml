@@ -1,4 +1,14 @@
 ---
+- name: Set amd64 arch
+  set_fact:
+    repo_arch: amd64
+  when: ansible_architecture == "x86_64"
+
+- name: Set arm64 arch
+  set_fact:
+    repo_arch: "{{ ansible_architecture }}"
+  when: (ansible_architecture == "arm64") or (ansible_architecture == "aarch64")
+
 - name: Include variables
   include_vars: "debian.yml"
 
