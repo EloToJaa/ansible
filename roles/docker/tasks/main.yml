@@ -1,42 +1,75 @@
 ---
-- name: Set amd64 arch
-  set_fact:
-    repo_arch: amd64
-  when: ansible_architecture == "x86_64"
-
-- name: Set arm64 arch
-  set_fact:
-    repo_arch: "{{ ansible_architecture }}"
-  when: (ansible_architecture == "arm64") or (ansible_architecture == "aarch64")
-
 - name: Include variables
   include_vars: "debian.yml"
 
-- name: Install required system packages
-  package:
-    state: present
-    name: "{{ docker_deps }}"
-  become: true
+- name: Check if Docker is installed
+  become: yes
+  command: docker -v 
+  register: docker_installed
+  ignore_errors: true
 
-- name: Install docker
-  package:
-    state: present
+- name: Install Docker 
+  become: yes
+  block:
+    - name: Add Docker's official GPG key
+      block:
+        - name: Update apt
+          include_tasks: apt.yml
+        - name: Install necessary packages
+          become: yes
+          ansible.builtin.apt:
+            name:
+              - ca-certificates 
+              - curl
+              - gnupg
+            state: latest
+            update_cache: yes
+        - name: Add GPG key
+          ansible.builtin.shell:
+            cmd: |
+              sudo install -m 0755 -d /etc/apt/keyrings
+              curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+              sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+    - name: Add the repository to Apt sources
+      block:
+        - name: Add repos
+          ansible.builtin.shell:
+            cmd: |
+              echo \
+              "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
+              "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+              sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+        - name: Update apt
+          include_tasks: apt.yml
+
+    - name: Install Docker packages
+      become: yes
+      ansible.builtin.apt:
+        name:
+          - docker-ce 
+          - docker-ce-cli 
+          - containerd.io 
+          - docker-buildx-plugin 
+          - docker-compose-plugin
+        state: latest
+        update_cache: yes
+  when: docker_installed.failed
+
+- name: Ensure Docker group exists
+  become: yes
+  ansible.builtin.group:
     name: docker
-  become: true
-
-- name: Ensure group docker exists
-  group:
-    name: docker
     state: present
-  become: true
+  register: docker_group
 
-- name: Add user "{{ username }}" to group docker
-  user:
-    name: "{{ username }}"
-    groups:
-      - docker
-    append: yes
-  become: true
+- name: Add User to docker group
+  become: yes
+  ansible.builtin.user:
+    name: yourUser
+    groups: docker 
+    append: true 
+  when: docker_group is changed
 
 - name: Install Docker Module for Python
   pip:
