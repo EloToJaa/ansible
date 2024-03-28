@@ -30,7 +30,6 @@ apt_software:
   - rlwrap
   - tmux
   - default-mysql-client
-  - seclists
   - chromium
   - zoxide
   - fzf
