@@ -30,14 +30,10 @@ apt_software:
   - rlwrap
   - tmux
   - default-mysql-client
-  - bloodhound
-  - neo4j
   - seclists
   - chromium
   - zoxide
   - fzf
-  - gobuster
-  - feroxbuster
 
 pipx_software:
   - pwntools
