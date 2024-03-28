@@ -15,7 +15,6 @@ software:
 
 apt_software:
   - alacritty
-  - jadx
   - apktool
   - gcc
   - g++
